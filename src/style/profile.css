@@ -1,0 +1,133 @@
+.profile-box {
+  display: block;
+}
+.profile-box .banner {
+  display: block;
+  width: 100%;
+  height: 450px;
+}
+.profile-box .company {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+}
+.company .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+.company .title-box .title {
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 22px;
+  color: rgba(66, 66, 66, 1);
+}
+.company .title-box .location {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 22px;
+  color: rgba(97, 97, 97, 1);
+}
+.profile-box .social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  width: 100%;
+  border: 1px solid rgba(218, 218, 218, 1);
+}
+.profile-box .social i {
+  background: rgba(0, 46, 102, 1);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 7px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+.profile-box .social i:nth-child(4) {
+  margin-right: 0;
+}
+.profile-box .main-data {
+  display: block;
+  padding: 30px 27px;
+}
+.main-data .data-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.data-item .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  color: rgba(0, 46, 102, 1);
+}
+.data-item .text {
+  color: rgba(66, 66, 66, 1);
+  font-size: 16px;
+  font-weight: 500;
+}
+.profile-box .multimedia {
+  width: 100%;
+  padding: 30px 15px;
+}
+.profile-box .multimedia .title {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  margin-bottom: 10px;
+}
+.multimedia .img-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.multimedia .img-box img {
+  display: block;
+  width: 108px;
+  height: 108px;
+  padding: 5px;
+}
+.multimedia .title.locate {
+  color: rgba(0, 46, 102, 1);
+  margin-top: 20px;
+}
+.multimedia .title.locate span {
+  color: rgba(153, 153, 153, 1);
+}
+.social-user {
+  border: 0.3px solid rgba(218, 218, 218, 1);
+  margin-bottom: 30px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.social-user .social {
+  border: none;
+  padding: 0;
+  height: 0;
+}
+.social-user .text {
+  margin-top: 12px;
+  font-size: 12px;
+  text-align: center;
+  color: rgba(153, 153, 153, 1);
+}

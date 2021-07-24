@@ -1,0 +1,216 @@
+@media (max-width: 768px) {
+  .business-box {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .business-box .page-title {
+    display: block;
+    margin: 20px 0 8px 18px;
+  }
+  .page-title small {
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(153, 153, 153, 1);
+    font-weight: 400;
+  }
+  .banner {
+    width: 100%;
+    position: relative;
+  }
+  .banner img {
+    width: 100%;
+    height: 100%;
+  }
+  .banner-title {
+    position: absolute;
+    left: 17px;
+    bottom: 17px;
+  }
+  .banner-title small {
+    color: #999;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .upload-box {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
+  .social-title {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: rgba(153, 153, 153, 1);
+  }
+  .upload-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 114px;
+    height: 114px;
+    background: rgba(38, 71, 150, 0.1);
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+  .map-box iframe {
+    width: 100%;
+  }
+  .card-box {
+    width: 100%;
+    margin-top: 30px;
+    box-shadow: 0px 2px 4px 0px rgba(38, 71, 150, 0.1);
+  }
+  .card-box .card-banner {
+    display: block;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(94.07deg, #f3f6fb 0%, #d1d8e3 100%);
+  }
+  .navbar-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 5px 16px;
+  }
+  .navbar-section .menu-btn .line2 {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: rgba(0, 46, 102, 1);
+  }
+  .navbar-section .menu-btn .line1 {
+    margin-bottom: 8px;
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: rgba(0, 46, 102, 1);
+  }
+  .navbar-section .section-title {
+    display: block;
+    color: rgba(66, 66, 66, 1);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    margin-left: 30px;
+  }
+  .business-box .business-card-box {
+    padding: 0 15px;
+  }
+  .card-box .card-title {
+    position: relative;
+    width: 100%;
+    height: 96px;
+    border-bottom: 0.2px solid rgba(218, 218, 218, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-title .title {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: normal;
+    color: rgba(0, 46, 102, 1);
+  }
+  .card-title .location {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    font-style: normal;
+    color: rgba(151, 151, 151, 1);
+  }
+  .card-box .logo-box {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 90%);
+    top: -90%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .card-box .logo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-box .card-content {
+    display: block;
+    width: 100%;
+    height: 200px;
+    padding: 12px 20px;
+  }
+  .card-content .business-type {
+    margin-bottom: 3px;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 22px;
+    font-style: normal;
+    color: rgba(0, 46, 102, 1);
+  }
+  .card-content .director-name {
+    margin-bottom: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: normal;
+    color: rgba(66, 66, 66, 1);
+  }
+  .card-content .phone {
+    margin-bottom: 3px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: normal;
+    color: rgba(66, 66, 66, 1);
+  }
+  .card-content .link {
+    margin-bottom: 3px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    font-style: normal;
+    color: rgba(1, 68, 151, 1);
+  }
+  .business-box .add-business {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    margin-top: 20px;
+    width: 100%;
+    height: 165px;
+    margin-bottom: 70px;
+  }
+  .add-business .add {
+    box-shadow: 0px 2px 4px 0px rgba(38, 71, 150, 0.1);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(153, 153, 153, 0.5);
+    font-size: 90px;
+    font-weight: 300;
+  }
+  .map-box {
+    display: block;
+    width: 100%;
+    height: 200px;
+    background: #999;
+    margin-bottom: 150px;
+  }
+  #margin {
+    margin-top: 50px;
+  }
+}

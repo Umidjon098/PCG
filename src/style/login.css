@@ -1,0 +1,75 @@
+.login-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  animation-name: Show;
+  animation-duration: 3s;
+}
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 15px;
+}
+.login-box .input-box {
+  width: 100%;
+  position: relative;
+}
+.login-box .input-box i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  color: rgba(153, 153, 153, 1);
+}
+.login-box .register-box {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.login-box .input-box input {
+  display: block;
+  width: 100%;
+  height: 52px;
+  padding: 14px 20px;
+  border-radius: 6px;
+  border: 0.3px solid #dadada;
+  box-shadow: 0px 0px 2px rgba(38, 71, 150, 0.1);
+  color: rgba(153, 153, 153, 1);
+}
+.login-box .input-box:nth-child(2) {
+  margin-top: 20px;
+}
+.login-box form button {
+  display: block;
+  width: 295px;
+  height: 52px;
+  font-size: 14px;
+  margin-top: 20px;
+  border-radius: 50px;
+  border: none;
+  border: 1px solid;
+  background-image: linear-gradient(180deg, #002e66 0%, #0a55b1 100%);
+  color: #fff;
+}
+.warning-volidation {
+  display: block;
+  width: 100%;
+  height: 12px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 12px;
+  color: red;
+}
+@keyframes Show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
