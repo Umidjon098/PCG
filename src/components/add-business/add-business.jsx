@@ -60,6 +60,7 @@ class AddBusiness extends Component {
             return (
               <section key={data.id} className="business-card-box">
                 <BusinessCard
+                  id={data.id}
                   logo={data.logo}
                   name={data.name}
                   region_name={data.region_name}
@@ -69,6 +70,7 @@ class AddBusiness extends Component {
                   telegram={data.telegram}
                   instagram={data.instagram}
                   facebook={data.facebook}
+                  status={data.status}
                 />
               </section>
             );

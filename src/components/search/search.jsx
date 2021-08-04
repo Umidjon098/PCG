@@ -2,11 +2,8 @@ import React, { Component } from "react";
 import SearchItem from "./search-item";
 import "../../style/search.css";
 import FilterPng from "../../image/icons/filter.png";
-import { Pagination } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Preloader from "../../image/preloader.gif";
-import FooterMenu from "../main-page/footer-menu";
 import Filter from "../filter/filter";
 
 class Search extends Component {
@@ -14,39 +11,26 @@ class Search extends Component {
     super(props);
     this.state = {
       businessList: [],
-      currentPage: 0,
       searchItem: "",
-      number: "1",
       toggle_filter: false,
+      empty: false,
     };
   }
 
   componentDidMount() {
     this.getBusinessList();
   }
-  getBusinessList = (number = 1) => {
+  getBusinessList = () => {
     const url = "/profile/business/";
     axios(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-      params: {
-        page: number,
-      },
     }).then((response) => {
-      this.setState({ businessList: response.data, currentPage: number });
+      this.setState({ businessList: response.data });
     });
   };
-  nextPagenate = () => {
-    this.setState({ currentPage: this.state.currentPage + 1 }, () => {
-      this.getBusinessList(this.state.currentPage);
-    });
-  };
-  prevPagenate = () => {
-    this.setState({ currentPage: this.state.currentPage - 1 }, () => {
-      this.getBusinessList(this.state.currentPage);
-    });
-  };
+
   handleSearchInput = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -59,22 +43,24 @@ class Search extends Component {
     };
     const params = {
       search: this.state.searchItem,
-      page: this.state.number,
     };
     axios(url, { headers, params: params }).then((response) => {
       this.setState({ businessList: response.data });
+      if (response.data.length === 0) {
+        this.setState({ empty: true });
+      }
     });
   };
   callBackFilter = (data) => {
     this.setState({ businessList: data, toggle_filter: false });
   };
   render() {
-    let countPage = [];
-    for (let i = 1; i <= this.state.businessList.num_pages; i++) {
-      countPage.push(i);
-    }
     return (
       <div>
+        <div className="swipe">
+          <span>Foydalanuvchilarni izlash</span>
+          <i className="fas fa-angle-double-right"></i>
+        </div>
         <div
           className={
             this.state.toggle_filter ? "filter-side toggle" : "filter-side"
@@ -105,14 +91,19 @@ class Search extends Component {
               </div>
             </div>
           </div>
-          {this.state.businessList === undefined ? (
-            <div className="preloader">
-              <img src={Preloader} alt="" />
-            </div>
+          {this.state.businessList.length === 0 ? (
+            this.state.empty ? (
+              <p className="text-center mt-3">Natija Topilmadi</p>
+            ) : (
+              <div className="preloader">
+                <img src={Preloader} alt="" />
+              </div>
+            )
           ) : (
             this.state.businessList.map((data) => {
               return (
                 <SearchItem
+                  id={data.id}
                   key={data.id}
                   logo={data.logo}
                   name={data.name}
@@ -127,24 +118,7 @@ class Search extends Component {
               );
             })
           )}
-          <div className="pagination-box">
-            <Pagination>
-              <Pagination.Prev onClick={this.prevPagenate} />
-              {countPage.map((count) => {
-                return (
-                  <Pagination.Item
-                    onClick={() => this.getBusinessList(count)}
-                    key={count}
-                  >
-                    {count}
-                  </Pagination.Item>
-                );
-              })}
-              <Pagination.Next onClick={this.nextPagenate} />
-            </Pagination>
-          </div>
         </div>
-        <FooterMenu active={"search"} />
       </div>
     );
   }

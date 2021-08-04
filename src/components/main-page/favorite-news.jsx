@@ -14,7 +14,10 @@ class FavoriteNewsItem extends Component {
           <div
             className={this.props.is_favorite ? "favorite like" : "favorite"}
           >
-            <i className="far fa-star"></i>
+            <i
+              className="far fa-star"
+              onClick={() => this.props.callBackNewsID(this.props.data)}
+            ></i>
           </div>
           <div className="seen">
             <i className="fas fa-eye"></i>

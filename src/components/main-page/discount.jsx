@@ -10,6 +10,9 @@ class Discount extends Component {
   getCallBacDiscountID = (id) => {
     this.props.getCallBacDiscountID(id);
   };
+  onCallBackId = (id, is_favorite) => {
+    this.props.updateDiscount(id, is_favorite);
+  };
   render() {
     if (this.props.discount.results === undefined) {
       return (
@@ -24,6 +27,8 @@ class Discount extends Component {
             return (
               <div key={data.id}>
                 <DiscountItem
+                  onCallBackId={this.onCallBackId}
+                  is_favorite={data.is_favorite}
                   getCallBacDiscountID={this.getCallBacDiscountID}
                   key={data.id}
                   id={data.id}

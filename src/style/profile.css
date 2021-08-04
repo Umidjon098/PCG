@@ -22,6 +22,12 @@
   border-radius: 50%;
   margin-right: 16px;
 }
+.company .logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .company .title-box .title {
   font-size: 16px;
   font-weight: 600;
@@ -63,6 +69,13 @@
 .profile-box .main-data {
   display: block;
   padding: 30px 27px;
+}
+.profile-box .banner .icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 18px;
+  color: rgba(0, 46, 102, 1);
 }
 .main-data .data-item {
   display: flex;
@@ -130,4 +143,12 @@
   font-size: 12px;
   text-align: center;
   color: rgba(153, 153, 153, 1);
+}
+.business-carousel {
+  width: 100%;
+  display: flex !important;
+}
+.business-carousel .item {
+  display: block;
+  width: 364px !important;
 }

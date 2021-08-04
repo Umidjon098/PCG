@@ -19,9 +19,9 @@ class Register extends Component {
       month: "",
       year: "",
       phone_number: "",
-      instagram: "https://instagram",
-      facebook: "https://facebook",
-      telegram: "https://telegram",
+      instagram: "",
+      facebook: "",
+      telegram: "",
       password: "",
       password2: "",
       numberChacking: null,
@@ -236,6 +236,8 @@ class Register extends Component {
             </span>
             <br />
             <span>Ижтимоий тармоғлардаги ҳаволангизни қолдиринг</span>
+            <br />
+            <span>Na'muna: https://instagram.com</span>
             <div style={{ marginTop: "-10px" }}>
               <input
                 type="text"

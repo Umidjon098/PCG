@@ -15,7 +15,8 @@ class DiscountDetail extends Component {
     }
   }
   getdiscountDetail = async () => {
-    const url = `/posts/discount/${this.props.id}`;
+    const id = localStorage.getItem("discountDetail");
+    const url = `/posts/discount/${id}/`;
     await axios(url, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
@@ -67,6 +68,7 @@ class DiscountDetail extends Component {
                 );
               })
             )}
+            <div className="follow-btn">ИШТИРОК этиш</div>
             <footer>
               <div>
                 <div className="seen">

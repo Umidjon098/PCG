@@ -8,27 +8,28 @@ import Map from "../YMap/map";
 import axios from "axios";
 import Alert from "../alert/alert";
 import AlertError from "../alert/alert-error";
-
+import Loader from "../../image/preloader.gif";
 class BusinessAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      logo: "",
+      logo: null,
       file: null,
       images: [],
-      name: "",
-      lat_long: "",
-      position: "",
-      website: "",
-      instagram: "https://instagram",
-      facebook: "https://facebook",
-      telegram: "https://telegram",
-      activity_type: "",
-      region: "",
+      name: null,
+      lat_long: null,
+      position: null,
+      website: null,
+      instagram: null,
+      facebook: null,
+      telegram: null,
+      activity_type: null,
+      region: null,
       regions: [],
-      gallery: "",
+      gallery: [],
       businessData: [],
       showalert: null,
+      event: false,
     };
     this.handleMapClick = this.handleMapClick.bind(this);
   }
@@ -49,7 +50,6 @@ class BusinessAdd extends Component {
   };
   fileSelectedHandler = (event) => {
     this.setState({ file: event.target.files[0] });
-
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -65,7 +65,9 @@ class BusinessAdd extends Component {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        this.setState({ gallery: reader.result });
+        this.setState((prevState) =>
+          this.setState({ gallery: [reader.result, ...prevState.gallery] })
+        );
       }
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -81,6 +83,7 @@ class BusinessAdd extends Component {
     this.setState({ lat_long: data });
   };
   createBusiness = (e) => {
+    this.setState({ event: true });
     e.preventDefault();
     const URL = "/profile/user-business/";
     var businessData = new FormData();
@@ -101,21 +104,22 @@ class BusinessAdd extends Component {
     businessData.append("facebook", this.state.facebook);
     businessData.append("telegram", this.state.telegram);
     businessData.append("region", this.state.region);
-
     axios({
       method: "POST",
       url: URL,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
-        "Content-Type": "multipart/form-data",
       },
       data: businessData,
     })
       .then(() => {
-        this.setState({ showalert: true });
+        this.setState({ showalert: true, event: false });
         setTimeout(() => {
           this.setState({ showalert: null });
         }, 3000);
+        setTimeout(() => {
+          this.props.history.push("/addbusiness");
+        }, 4000);
       })
       .catch((error) => {
         console.log(error);
@@ -127,12 +131,21 @@ class BusinessAdd extends Component {
       this.setState({ businessData: response.data });
     });
   };
-
+  removeItem = (id) => {
+    if (id > -1) {
+      this.state.gallery.splice(id, 1);
+      this.state.images.splice(id, 1);
+      this.setState({ gallery: this.state.gallery });
+    }
+  };
   render() {
     return (
       <div className="business-box">
         <Alert showalert={this.state.showalert} />
         <AlertError showalert={this.state.showalert} />
+        <div className={this.state.event ? "waiting-event" : "d-none"}>
+          <img src={Loader} alt="" />
+        </div>
         <div className="page-title">
           <small>Бизнесингиз ҳақида маълумотларни тўлдиринг</small>
         </div>
@@ -204,6 +217,7 @@ class BusinessAdd extends Component {
                 киритинг (агар бўлса)
               </span>
               <div style={{ marginTop: "-10px" }}>
+                <span>https://instagram.com</span>
                 <input
                   type="text"
                   placeholder="Instagram"
@@ -229,31 +243,38 @@ class BusinessAdd extends Component {
               <span className="social-title">
                 Бизнесингизга оид фото суратларни <br /> жойлаштиришингиз мункун
               </span>
-              <div className="upload-image">
-                <input
-                  type="file"
-                  multiple
-                  style={{ display: "none" }}
-                  onChange={this.businessImgHandler}
-                  ref={(fileInput) => (this.fileInput = fileInput)}
-                />
-                <img
-                  src={CameraWhite}
-                  alt="camera icon"
-                  onClick={() => this.fileInput.click()}
-                />
+              <div className="image-item">
+                {this.state.gallery.map((data, index) => {
+                  return (
+                    <div key={index} className="item">
+                      <i
+                        className="fas fa-times"
+                        onClick={() => this.removeItem(index)}
+                      ></i>
+                      <img src={data} alt="" />
+                    </div>
+                  );
+                })}
+                <div className="upload-image">
+                  <input
+                    type="file"
+                    multiple
+                    style={{ display: "none" }}
+                    onChange={this.businessImgHandler}
+                    ref={(fileInput) => (this.fileInput = fileInput)}
+                  />
+                  <img
+                    src={CameraWhite}
+                    alt="camera icon"
+                    onClick={() => this.fileInput.click()}
+                  />
+                </div>
               </div>
               <span className="social-title">
                 Картадан иш жойингизни белгиланг
               </span>
               <div className="map-box mb-5">
                 <Map callBackData={this.callBackData} />
-              </div>
-              <div className="indecator-box">
-                <span className="active"></span>
-                <span className="active"></span>
-                <span className="active"></span>
-                <span></span>
               </div>
               <button onClick={this.createBusiness}>ҚЎШИШ</button>
             </form>

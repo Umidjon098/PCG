@@ -4,22 +4,40 @@ import "../../style/sidebar.css";
 import Banner from "../../image/sidebar-banner.png";
 import Avatar from "../../image/avatar.png";
 import SidebarItem from "./sidebar-item";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      sidebarData: [],
+    };
   }
-  onDisplayProfile = () => {};
+  componentDidMount() {
+    this.getProfiledata();
+  }
+  logOut = () => {
+    localStorage.clear();
+    this.props.history.push("/login");
+  };
+  getProfiledata = () => {
+    const url = "/profile/user-profile/";
+    const headers = {
+      Authorization: `Bearer  ${localStorage.getItem("accessToken")}`,
+    };
+    axios(url, { headers: headers }).then((response) => {
+      this.setState({ sidebarData: response.data });
+    });
+  };
   render() {
+    const { sidebarData } = this.state;
     return (
       <div className={this.props.toggle ? "sidebar-box active" : "sidebar-box"}>
         <div
           className={this.props.toggle ? "dark-overlay" : ""}
           onClick={() => this.props.callBackToggle(false)}
         ></div>
-
         <div className="banner">
           <img src={Banner} alt="" />
           <div className="search-box">
@@ -33,14 +51,16 @@ class Sidebar extends Component {
           </div>
         </div>
         <div className="user-data">
-          <img src={Avatar} alt="" />
-          <Link to="/profile">Робия Аъзамовна</Link>
-          <div className="phone">+998 97 707 07 70</div>
+          <img src={sidebarData.image} alt="" />
+          <Link to="/profile">
+            {sidebarData.first_name + " " + sidebarData.last_name}
+          </Link>
+          <div className="phone">{sidebarData.phone_number}</div>
         </div>
         <Scrollbars style={{ height: "62vh" }}>
           <SidebarItem url={"/mainpage"} icon={"fas fa-home"} name={"Асосий"} />
           <SidebarItem
-            url={"/"}
+            url={"/balance_cart"}
             icon={"fas fa-money-check-alt"}
             name={"Маблағни текшириш"}
           />
@@ -51,7 +71,7 @@ class Sidebar extends Component {
             name={"PCG Онлайн дўкон"}
           />
           <SidebarItem
-            url={"/"}
+            url={"/business_market"}
             icon={"far fa-building"}
             name={"Бизнес маркет"}
           />
@@ -62,7 +82,7 @@ class Sidebar extends Component {
           />
           <hr />
           <SidebarItem
-            url={"/"}
+            url={"/referal_link"}
             icon={"fas fa-envelope-open-text"}
             name={"Дўстларга таклиф..."}
           />
@@ -71,7 +91,7 @@ class Sidebar extends Component {
             icon={"fas fa-clipboard-list"}
             name={"Ҳаридлар архиви"}
           />
-          <SidebarItem url={"/edit"} icon={"fas fa-cog"} name={"Созламалар"} />
+          <SidebarItem url={"/"} icon={"fas fa-cog"} name={"Созламалар"} />
           <SidebarItem url={"/"} icon={"fas fa-sign-out-alt"} name={"Чиқиш"} />
         </Scrollbars>
       </div>
@@ -79,4 +99,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

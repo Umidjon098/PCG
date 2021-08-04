@@ -37,7 +37,7 @@ class YandexMap extends Component {
           onClick={this.onMapClick}
           state={this.state.mapState}
           width="100%"
-          height="300px"
+          height="210px"
         >
           {this.state.coords ? (
             <Placemark geometry={this.state.coords} />

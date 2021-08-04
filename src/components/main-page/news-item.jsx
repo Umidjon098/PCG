@@ -30,8 +30,8 @@ class NewsItem extends Component {
         </div>
         <Link
           to="/news-detail"
+          onClick={() => localStorage.setItem("newsID", this.props.id)}
           className="title"
-          onClick={this.props.onCallBackId.bind(this, this.props.id)}
         >
           {this.props.title}
         </Link>

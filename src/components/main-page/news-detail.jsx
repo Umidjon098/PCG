@@ -10,12 +10,11 @@ class NewsDetail extends Component {
     };
   }
   componentDidMount() {
-    if (this.props.id !== "") {
-      this.getNewsDetail();
-    }
+    this.getNewsDetail();
   }
   getNewsDetail = async () => {
-    const url = `/posts/news/${this.props.id}`;
+    const id = localStorage.getItem("newsID");
+    const url = `/posts/news/${id}`;
     await axios(url, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),

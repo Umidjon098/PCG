@@ -6,17 +6,31 @@ class FavoriteDiscount extends Component {
     this.state = {};
   }
   render() {
-    console.log(this.props.favoriteDiscount.discount.results);
+    const time = this.props.created_at.slice(11, 16);
     return (
       <div className="discount-box">
         <div className="image-box">
-          <img src={this.props.favoriteDiscount.discount.img} alt="" />
-          <div className="title">
-            {this.props.favoriteDiscount.discount.title}
+          <img src={this.props.img} alt="" />
+          <div
+            className={this.props.is_favorite ? "favorite like" : "favorite"}
+          >
+            <i
+              className="far fa-star"
+              onClick={() =>
+                this.props.updateDiscount(this.props.id, this.props.is_favorite)
+              }
+            ></i>
           </div>
-          <div className="text">
-            {this.props.favoriteDiscount.discount.text}
+          <div className="seen">
+            <i className="fas fa-eye"></i>
+            <span>{this.props.views}</span>
           </div>
+          <div className="time">
+            <i className="far fa-clock"></i>
+            <span>{time}</span>
+          </div>
+          <div className="title">{this.props.title}</div>
+          <div className="text">{this.props.text}</div>
         </div>
       </div>
     );

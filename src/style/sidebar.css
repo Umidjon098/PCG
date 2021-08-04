@@ -41,8 +41,11 @@
   border-bottom: 1px solid rgba(151, 151, 151, 1);
 }
 .sidebar-box .user-data img {
+  width: 65px;
+  height: 65px;
   position: absolute;
   top: -32%;
+  border-radius: 50%;
 }
 .sidebar-box .user-data .user-name {
   color: rgba(0, 46, 102, 1) !important;
@@ -76,6 +79,25 @@
   position: absolute;
   color: rgba(183, 183, 183, 1);
 }
+.sidebar-box .log-out {
+  width: 100%;
+  padding: 10px;
+}
+.sidebar-box .log-out i {
+  position: absolute;
+  color: rgba(183, 183, 183, 1);
+}
+.sidebar-box .log-out span {
+  margin-top: -5px;
+  margin-left: 40px;
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(61, 61, 61, 1);
+  text-decoration: none;
+  text-align: left;
+}
+
 .sidebar-box .search-box {
   margin-top: 0;
   position: absolute;

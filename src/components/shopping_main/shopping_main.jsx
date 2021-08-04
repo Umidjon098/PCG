@@ -5,6 +5,7 @@ import AudioItem from "./audio-item";
 import Books from "./books";
 import VideoItem from "./video-item";
 import FooterMenu from "../main-page/footer-menu";
+import Sidebar from "../sidebar/sidebar";
 class ShoppingMain extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,7 @@ class ShoppingMain extends Component {
       number: 1,
       List: [],
       page: "audio",
+      toggle: false,
     };
   }
   componentDidMount() {
@@ -112,14 +114,25 @@ class ShoppingMain extends Component {
       this.getCourses(this.state.number, this.state.page);
     });
   };
+  callBackToggle = (toggle) => {
+    this.setState({ toggle });
+  };
+  sidebarToggle = () => {
+    this.setState({ toggle: !this.state.toggle });
+  };
+
   render() {
     const { page, List } = this.state;
     return (
       <div>
+        <Sidebar
+          toggle={this.state.toggle}
+          callBackToggle={this.callBackToggle}
+        />
         <div className="shopping-box">
           <div className="shoping-nav">
             <div className="top-nav">
-              <div className="burger-bot">
+              <div className="burger-bot" onClick={this.sidebarToggle}>
                 <span></span>
                 <span></span>
               </div>
@@ -172,7 +185,6 @@ class ShoppingMain extends Component {
             ""
           )}
         </div>
-        <FooterMenu />
       </div>
     );
   }

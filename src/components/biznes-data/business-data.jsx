@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import Loader from "../../image/preloader.gif";
 import "../../style/register.css";
 import Camera from "../../image/icons/camera-blue.png";
 import CameraWhite from "../../image/icons/camera.png";
@@ -19,14 +20,15 @@ class BusinessData extends Component {
       lat_long: "",
       position: "",
       website: "",
-      instagram: "https://instagram",
-      facebook: "https://facebook",
-      telegram: "https://telegram",
+      instagram: null,
+      facebook: null,
+      telegram: null,
       activity_type: null,
       region: null,
       regions: [],
-      gallery: "",
+      gallery: [],
       businessData: [],
+      event: false,
     };
     this.handleMapClick = this.handleMapClick.bind(this);
   }
@@ -49,7 +51,6 @@ class BusinessData extends Component {
   };
   fileSelectedHandler = (event) => {
     this.setState({ file: event.target.files[0] });
-
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
@@ -65,7 +66,9 @@ class BusinessData extends Component {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        this.setState({ gallery: reader.result });
+        this.setState((prevState) =>
+          this.setState({ gallery: [reader.result, ...prevState.gallery] })
+        );
       }
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -81,6 +84,7 @@ class BusinessData extends Component {
     this.setState({ lat_long: data });
   };
   createUser = async (e) => {
+    this.setState({ event: true });
     e.preventDefault();
     const { userData, groupData } = this.props;
     const URL = "/profile/register/";
@@ -147,16 +151,26 @@ class BusinessData extends Component {
       },
     })
       .then(() => {
+        this.setState({ event: false });
         this.props.history.push("/success");
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
+  removeItem = (id) => {
+    if (id > -1) {
+      this.state.gallery.splice(id, 1);
+      this.state.images.splice(id, 1);
+      this.setState({ gallery: this.state.gallery });
+    }
+  };
   render() {
     return (
       <div className="business-box">
+        <div className={this.state.event ? "waiting-event" : "d-none"}>
+          <img src={Loader} alt="" />
+        </div>
         <div className="page-title">
           <small>Бизнесингиз ҳақида маълумотларни тўлдиринг</small>
         </div>
@@ -226,6 +240,8 @@ class BusinessData extends Component {
                 Бизнесингизнинг ижтимоий тармоқлардаги саҳифалар ҳаволасини
                 киритинг (агар бўлса)
               </span>
+              <br />
+              <span>Na'muna: https://instagram.com</span>
               <div style={{ marginTop: "-10px" }}>
                 <input
                   type="text"
@@ -252,19 +268,32 @@ class BusinessData extends Component {
               <span className="social-title">
                 Бизнесингизга оид фото суратларни <br /> жойлаштиришингиз мункун
               </span>
-              <div className="upload-image">
-                <input
-                  type="file"
-                  multiple
-                  style={{ display: "none" }}
-                  onChange={this.businessImgHandler}
-                  ref={(fileInput) => (this.fileInput = fileInput)}
-                />
-                <img
-                  src={CameraWhite}
-                  alt="camera icon"
-                  onClick={() => this.fileInput.click()}
-                />
+              <div className="image-item">
+                {this.state.gallery.map((data, index) => {
+                  return (
+                    <div key={index} className="item">
+                      <i
+                        className="fas fa-times"
+                        onClick={() => this.removeItem(index)}
+                      ></i>
+                      <img src={data} alt="" />
+                    </div>
+                  );
+                })}
+                <div className="upload-image">
+                  <input
+                    type="file"
+                    multiple
+                    style={{ display: "none" }}
+                    onChange={this.businessImgHandler}
+                    ref={(fileInput) => (this.fileInput = fileInput)}
+                  />
+                  <img
+                    src={CameraWhite}
+                    alt="camera icon"
+                    onClick={() => this.fileInput.click()}
+                  />
+                </div>
               </div>
               <span className="social-title">
                 Картадан иш жойингизни белгиланг

@@ -2,6 +2,15 @@
   animation-name: Show;
   animation-duration: 4s;
 }
+.carousel-box {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 70px;
+}
+.carousel-box img {
+  width: 100%;
+  height: 100%;
+}
 .preloader {
   width: 100%;
   height: 100px;
@@ -25,19 +34,20 @@
   font-weight: 500;
   color: rgba(66, 66, 66, 1);
 }
-.main-box .search-box {
+.main-box .top-search-box {
   position: relative;
   width: 100%;
   padding: 0 17px;
+  max-height: 100px;
 }
-.main-box .search-box input {
+.main-box .top-search-box input {
   width: 100%;
   background: #fff;
   padding: 5px 8px;
   border: 0.3px solid rgba(229, 229, 229, 1);
   border-radius: 5px;
 }
-.main-box .search-box i {
+.main-box .top-search-box i {
   position: absolute;
   top: 10px;
   color: rgba(218, 218, 218, 1);
@@ -109,17 +119,17 @@
   text-overflow: ellipsis;
 }
 
-.new-box .image-box .favorite {
+.image-box .favorite {
   position: absolute;
   top: 14px;
   right: 16px;
   color: #fff;
   font-size: 20px;
 }
-.new-box .image-box .favorite.like {
+.image-box .favorite.like {
   color: gold;
 }
-.new-box .image-box .seen {
+.image-box .seen {
   display: flex;
   position: absolute;
   right: 16px;
@@ -128,10 +138,10 @@
   color: #fff;
   font-size: 12px;
 }
-.new-box .image-box .seen i {
+.image-box .seen i {
   margin-right: 8px;
 }
-.new-box .image-box .time {
+.image-box .time {
   position: absolute;
   left: 16px;
   bottom: 12px;
@@ -156,7 +166,8 @@
   padding: 14px 30px;
   border: 1px solid #999;
   bottom: 0;
-  background: #fff;
+  background: #fff !important;
+  z-index: 10;
   /* margin-bottom: 20px; */
 }
 .menu-item {
@@ -205,7 +216,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   position: absolute;
-  bottom: 18px;
+  bottom: 40px;
   left: 16px;
   color: #fff;
   font-weight: 400;
@@ -230,6 +241,9 @@
   right: 16px;
   color: rgba(255, 164, 0, 1);
 }
+.favorite-box .star .active {
+  color: rgba(255, 164, 0, 1);
+}
 .text-box {
   padding: 20px 17px;
   font-size: 14px;
@@ -242,6 +256,21 @@
   color: #999;
   font-weight: 400;
 }
+.follow-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 46, 102, 1);
+  width: 92%;
+  height: 52px;
+  background: none;
+  border-radius: 26px;
+  color: #fff;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #0a55b1 13.54%, #01306a 100%);
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
 .text-box .title {
   font-size: 16px;
   font-weight: 500;
@@ -249,28 +278,24 @@
   margin-bottom: 5px;
 }
 .favorite-box .image-box {
-  display: flex;
   width: 100%;
   height: 150px;
   flex-wrap: wrap;
 }
 .image-box .large-img {
-  display: block;
-  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 160px;
 }
-.image-box .small-img {
-  display: block;
-  width: 30%;
-}
+
 .image-box .large-img img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
-.image-box .small-img img {
-  width: 100%;
-  height: 100%;
-}
 .favorite-box footer {
   display: flex;
   justify-content: space-between;

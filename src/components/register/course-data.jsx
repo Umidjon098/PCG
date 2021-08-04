@@ -6,9 +6,9 @@ class CourseData extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "",
-      number_type: "",
-      number_of_group: "",
+      type: null,
+      number_type: null,
+      number_of_group: null,
       groupData: [],
     };
   }

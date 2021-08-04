@@ -19,7 +19,7 @@ class News extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="mt-4">
           {this.props.news.results.map((data) => {
             return (
               <NewsItem

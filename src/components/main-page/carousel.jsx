@@ -1,45 +1,53 @@
 import React, { Component } from "react";
-import Banner from "../../image/main-banner.jpg";
-import Banner1 from "../../image/main-banner2.jpg";
-import Banner2 from "../../image/main-banner3.jpg";
+import Preloader from "../../image/preloader.gif";
 
 import Carousel from "react-bootstrap/Carousel";
+import axios from "axios";
 class Carousell extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      carouselData: [],
+    };
   }
+  componentDidMount() {
+    this.getCarouselData();
+  }
+  getCarouselData = () => {
+    const url = "/posts/carousel/";
+    const headers = {
+      Authorization: `Bearer  ${localStorage.getItem("accessToken")}`,
+    };
+    axios(url, { headers: headers }).then((response) => {
+      this.setState({ carouselData: response.data });
+    });
+  };
   render() {
-    return (
-      <Carousel>
-        <Carousel.Item>
-          <img className="d-block w-100" src={Banner} alt="First slide" />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={Banner1} alt="Second slide" />
-
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src={Banner2} alt="Third slide" />
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-    );
+    if (this.state.carouselData === undefined) {
+      return (
+        <div className="preloader">
+          <img src={Preloader} alt="" />
+        </div>
+      );
+    } else {
+      return (
+        <div className="carousel-box">
+          <Carousel>
+            {this.state.carouselData.map((data, index) => {
+              return (
+                <Carousel.Item key={index}>
+                  <img className="d-block" src={data.image} alt="First slide" />
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        </div>
+      );
+    }
   }
 }
-
+// <Carousel.Item>
+//   <img className="d-block w-100" src={Banner} alt="First slide" />
+//   <Carousel.Caption></Carousel.Caption>
+// </Carousel.Item>;
 export default Carousell;

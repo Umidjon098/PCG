@@ -28,14 +28,16 @@ class Login extends Component {
         password,
       })
       .then((response) => {
-        this.props.history.push("/mainpage");
         localStorage.setItem("accessToken", response.data.access);
         localStorage.setItem("refreshToken", response.data.refresh);
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error.response.data.message);
         this.setState({ warning: true });
       });
+    if (localStorage.getItem("accessToken")) {
+      this.props.history.push("/mainpage");
+    }
   };
   render() {
     return (

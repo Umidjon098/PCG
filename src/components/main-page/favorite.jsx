@@ -22,6 +22,8 @@ class Favorite extends Component {
             return (
               <div key={data.id}>
                 <FavoriteNewsItem
+                  callBackNewsID={this.props.callBackNewsID}
+                  data={data}
                   key={data.id}
                   id={data.id}
                   img={data.font_photo}
@@ -37,7 +39,25 @@ class Favorite extends Component {
           {this.props.favoruitList.discount.results.length === 0 ? (
             <div></div>
           ) : (
-            <FavoriteDiscount favoriteDiscount={this.props.favoruitList} />
+            <div>
+              {this.props.favoruitList.discount.results.map((data) => {
+                return (
+                  <div key={data.id}>
+                    <FavoriteDiscount
+                      updateDiscount={this.props.updateDiscount}
+                      key={data.id}
+                      id={data.id}
+                      img={data.font_photo}
+                      title={data.title}
+                      text={data.font_text}
+                      views={data.views}
+                      created_at={data.created_at}
+                      is_favorite={data.is_favorite}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       );

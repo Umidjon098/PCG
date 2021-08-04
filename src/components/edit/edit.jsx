@@ -44,12 +44,14 @@ class EditData extends Component {
   }
   updateUserData = async (e) => {
     e.preventDefault();
-    const url = "/profile/user";
+    const url = "/profile/user/";
     const headers = {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     };
     var userForm = new FormData();
-    userForm.append("image", this.state.file);
+    if (this.state.file !== null) {
+      userForm.append("image", this.state.file);
+    }
     userForm.append("first_name", this.state.first_name);
     userForm.append("last_name", this.state.last_name);
     userForm.append("middle_name", this.state.middle_name);
@@ -66,7 +68,7 @@ class EditData extends Component {
       headers: headers,
       data: userForm,
     })
-      .then((response) => {
+      .then(() => {
         this.props.history.push("/success");
       })
       .catch((error) => {

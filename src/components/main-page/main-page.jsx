@@ -12,7 +12,7 @@ class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
+      id: null,
       toggle: false,
       display: "news",
       List: [],
@@ -21,6 +21,8 @@ class MainPage extends Component {
       searchItem: "",
       number: "1",
       currentPage: 0,
+      favoriteDis: false,
+      remove: false,
     };
   }
   componentDidMount() {
@@ -32,18 +34,19 @@ class MainPage extends Component {
     this.setState({ [name]: value });
   };
 
-  // callBackNewsID = (id) => {
-  //   console.log(id);
-  //   this.setState({ id });
-  // };
-
   componentDidUpdate() {
     if (this.state.favorite) {
       this.getNews();
     }
+    if (this.state.favoriteDis) {
+      this.getDiscount();
+    }
+    if (this.state.remove) {
+      this.getFavoruit();
+    }
   }
 
-  getNews = (number = 1) => {
+  getNews = async (number = 1) => {
     const url = "/posts/news/";
     axios(url, {
       headers: {
@@ -56,11 +59,10 @@ class MainPage extends Component {
       this.setState({ List: response.data, currentPage: number });
     });
   };
-  updateNews = (data) => {
+  updateNews = async (data) => {
     this.props.getCallBackNewsID(data);
-
-    this.setState({ favorite: true });
-    const url = `/posts/news/${data.id}`;
+    this.setState({ favorite: true, remove: true });
+    const url = `/posts/news/${data.id}/`;
     let params = {};
     if (data.is_favorite) {
       params = {
@@ -74,8 +76,28 @@ class MainPage extends Component {
     const headers = {
       Authorization: `Bearer  ${localStorage.getItem("accessToken")}`,
     };
-    axios.put(url, params, { headers }).then((response) => {
-      this.setState({ favorite: false });
+    await axios.put(url, params, { headers }).then((response) => {
+      this.setState({ favorite: false, remove: false });
+    });
+  };
+  updateDiscount = async (id, is_favorite) => {
+    this.setState({ favoriteDis: true, remove: true });
+    const url = `/posts/discount/${id}/`;
+    let params = {};
+    if (is_favorite) {
+      params = {
+        update_type: "delete",
+      };
+    } else {
+      params = {
+        update_type: "add",
+      };
+    }
+    const headers = {
+      Authorization: `Bearer  ${localStorage.getItem("accessToken")}`,
+    };
+    await axios.put(url, params, { headers }).then(() => {
+      this.setState({ favoriteDis: false, remove: false });
     });
   };
   getDiscount = (number = 1) => {
@@ -91,9 +113,9 @@ class MainPage extends Component {
       this.setState({ List: response.data, currentPage: number });
     });
   };
-  getFavoruit = () => {
+  getFavoruit = async () => {
     const url = "/posts/favorite/";
-    axios(url, {
+    await axios(url, {
       headers: {
         Authorization: "Bearer  " + localStorage.getItem("accessToken"),
       },
@@ -101,10 +123,10 @@ class MainPage extends Component {
       //    page: number,
       //  },
     }).then((response) => {
-      this.setState({ favoruitList: response.data });
+      this.setState({ favoruitList: response.data, remove: false });
     });
   };
-  search = (e) => {
+  search = async (e) => {
     e.preventDefault();
     let url = "";
     if (this.state.display === "news") {
@@ -120,7 +142,7 @@ class MainPage extends Component {
       search: this.state.searchItem,
       page: this.state.number,
     };
-    axios(url, { headers, params: params }).then((response) => {
+    await axios(url, { headers, params: params }).then((response) => {
       this.setState({ List: response.data });
     });
   };
@@ -185,7 +207,7 @@ class MainPage extends Component {
             </div>
             <div className="page-title">Асосий саҳифа</div>
           </div>
-          <div className="search-box">
+          <div className="top-search-box">
             <form onSubmit={this.search}>
               <input
                 type="text"
@@ -249,10 +271,15 @@ class MainPage extends Component {
             <Discount
               getCallBacDiscountID={this.getCallBacDiscountID}
               discount={this.state.List}
+              updateDiscount={this.updateDiscount}
             />
           </div>
           <div className={this.state.display === "select" ? "" : "d-none"}>
-            <Favorite favoruitList={this.state.favoruitList} />
+            <Favorite
+              callBackNewsID={this.updateNews}
+              updateDiscount={this.updateDiscount}
+              favoruitList={this.state.favoruitList}
+            />
           </div>
           <div
             className={
