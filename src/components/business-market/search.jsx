@@ -14,7 +14,7 @@ class MarketSearch extends Component {
   };
   render() {
     return (
-      <div className="search-box">
+      <div className="top-search-box">
         <div className="search-input">
           <div className="input">
             <form onSubmit={this.search}>

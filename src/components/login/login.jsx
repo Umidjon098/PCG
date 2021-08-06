@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../../style/login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Loader from "../../image/loader.gif";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -9,9 +10,9 @@ class Login extends Component {
       phone_number: "",
       password: "",
       warning: false,
+      login: false,
     };
   }
-  componentDidMount() {}
 
   handleInput = (e) => {
     const { value, name } = e.target;
@@ -20,6 +21,7 @@ class Login extends Component {
 
   Login = (e) => {
     e.preventDefault();
+    this.setState({ login: true });
     const { phone_number, password } = this.state;
     const URL = "/profile/token/";
     axios
@@ -30,19 +32,22 @@ class Login extends Component {
       .then((response) => {
         localStorage.setItem("accessToken", response.data.access);
         localStorage.setItem("refreshToken", response.data.refresh);
+        if (localStorage.getItem("accessToken")) {
+          this.props.history.push("/mainpage");
+          this.setState({ login: false });
+        }
       })
-      .catch((error) => {
-        console.error(error.response.data.message);
+      .catch(() => {
         this.setState({ warning: true });
       });
-    if (localStorage.getItem("accessToken")) {
-      this.props.history.push("/mainpage");
-    }
   };
   render() {
     return (
       <div className="login-box">
         <form>
+          <div className={this.state.login ? "loader" : "d-none"}>
+            <img src={Loader} alt="" />
+          </div>
           <div className="input-box">
             <i className="fas fa-phone"></i>
             <input
@@ -82,6 +87,7 @@ class Login extends Component {
               </Link>
             </span>
           </div>
+
           <button className="submit-button" onClick={this.Login}>
             КИРИШ
           </button>

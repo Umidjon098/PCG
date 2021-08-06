@@ -14,7 +14,7 @@ class BuyProduct extends Component {
   getBasketList = () => {
     const url = "/courses/cs/basket/";
     const headers = {
-      Authorization: "Bearer  " + localStorage.getItem("accessToken"),
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
     };
     axios.get(url, { headers: headers }).then((response) => {
       this.setState({ basketList: response.data });
@@ -53,6 +53,26 @@ class BuyProduct extends Component {
                   : this.state.basketList.total + " BRO"
               }
             />
+            {this.state.basketList.data === undefined
+              ? ""
+              : this.state.basketList.data.map((data) => {
+                  console.log(data);
+                  return (
+                    <div key={data.id} className="book-box">
+                      <div className="book">
+                        <div className="book-img">
+                          <img src={data.fon_image} alt="" />
+                        </div>
+                        <div className="content">
+                          <div className="title">{data.title}</div>
+                          <div className="short-description">
+                            {data.description}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
             <button className="mt-3" onClick={this.buyProducts}>
               Tасдиқлаш
             </button>

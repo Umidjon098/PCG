@@ -20,6 +20,8 @@ class Discount extends Component {
           <img src={Preloader} alt="" />
         </div>
       );
+    } else if (this.props.discount.results.length === 0) {
+      return <p className="text-center mt-3">Natija Topilmadi</p>;
     } else {
       return (
         <div>

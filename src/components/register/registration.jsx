@@ -5,7 +5,6 @@ import {
   withRouter,
   BrowserRouter as Router,
 } from "react-router-dom";
-import BusinessData from "../biznes-data/business-data";
 import CourseData from "./course-data";
 import Register from "./register";
 class Registration extends Component {
@@ -33,15 +32,12 @@ class Registration extends Component {
           <Route exact path={path}>
             <Register callBackRegisterData={this.callBackRegisterData} />
           </Route>
-
-          <Route path={`${path}/business`}>
-            <BusinessData
-              userData={this.state.userData}
-              groupData={this.state.groupData}
-            />
-          </Route>
           <Route path={`${path}/coursedata`}>
-            <CourseData url={url} callBackGroupID={this.callBackGroupID} />
+            <CourseData
+              url={url}
+              userData={this.state.userData}
+              callBackGroupID={this.callBackGroupID}
+            />
           </Route>
         </Switch>
       </div>

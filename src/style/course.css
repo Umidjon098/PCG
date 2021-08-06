@@ -40,7 +40,8 @@
   .indecator-box span:last-child {
     margin-right: 0;
   }
-  .course-box a {
+  .course-box a,
+  .course-box button {
     display: flex;
     justify-content: center;
     align-items: center;

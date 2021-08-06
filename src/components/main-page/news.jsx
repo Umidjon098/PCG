@@ -17,6 +17,8 @@ class News extends Component {
           <img src={Preloader} alt="" />
         </div>
       );
+    } else if (this.props.news.results.length === 0) {
+      return <p className="text-center mt-3">Natija Topilmadi</p>;
     } else {
       return (
         <div className="mt-4">

@@ -9,8 +9,8 @@ class BusinessCard extends Component {
     return (
       <div className="card-box">
         <Link
-          to="/business_detail"
-          onClick={() => localStorage.setItem("businessID", this.props.id)}
+          to="/businessedit"
+          onClick={() => localStorage.setItem("businesseditID", this.props.id)}
         >
           <div className="card-banner"></div>
           <div className="card-title">

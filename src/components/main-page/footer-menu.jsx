@@ -39,7 +39,7 @@ class FooterMenu extends Component {
           </Link>
         </div>
         <div className="menu-item">
-          <Link to="/">
+          <Link to="/message">
             <i className="fas fa-envelope"></i>
           </Link>
         </div>

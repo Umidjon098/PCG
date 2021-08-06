@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Bro from "../../image/icons/bro.svg";
 import Buy from "../../image/icons/buy.svg";
+import Preloader from "../../image/preloader.gif";
+
 class VideoDetail extends Component {
   constructor(props) {
     super(props);
@@ -10,8 +12,10 @@ class VideoDetail extends Component {
     const { data } = this.props;
     return (
       <div>
-        {data === undefined ? (
-          <div></div>
+        {data.length === 0 ? (
+          <div className="preloader">
+            <img src={Preloader} alt="" />
+          </div>
         ) : (
           <div className="video-course detail">
             <div className={data.file === null ? "video" : "d-none"}>

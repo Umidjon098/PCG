@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Bro from "../../image/icons/bro.svg";
 import Buy from "../../image/icons/buy.svg";
+import Preloader from "../../image/preloader.gif";
 import axios from "axios";
 class BookDetail extends Component {
   constructor(props) {
@@ -23,15 +24,17 @@ class BookDetail extends Component {
       };
     }
     await axios.patch(url, data, { headers: headers }).then((data) => {
-      this.props.getCallBackList(data);
+      this.props.getCallBackList(data.data);
     });
   };
   render() {
     const { data } = this.props;
     return (
       <div>
-        {data === undefined ? (
-          <div></div>
+        {data.length === 0 ? (
+          <div className="preloader">
+            <img src={Preloader} alt="" />
+          </div>
         ) : (
           <div className="video-course detail">
             <div className="video">

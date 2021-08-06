@@ -1,7 +1,7 @@
 .alert,
 .alert-error {
   background: #00c851;
-  min-width: 330px;
+  min-width: 96%;
   min-height: 80px;
   position: fixed;
   left: 7px;

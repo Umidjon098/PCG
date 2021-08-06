@@ -221,21 +221,18 @@ class BusinessAdd extends Component {
                 <input
                   type="text"
                   placeholder="Instagram"
-                  value={this.state.instagram}
                   onChange={this.handleInput}
                   name="instagram"
                 />
                 <input
                   type="url"
                   placeholder="Telegram"
-                  value={this.state.telegram}
                   onChange={this.handleInput}
                   name="telegram"
                 />
                 <input
                   type="text"
                   placeholder="Facebook"
-                  value={this.state.facebook}
                   onChange={this.handleInput}
                   name="facebook"
                 />

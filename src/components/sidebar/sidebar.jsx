@@ -19,7 +19,7 @@ class Sidebar extends Component {
   }
   logOut = () => {
     localStorage.clear();
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
   getProfiledata = () => {
     const url = "/profile/user-profile/";
@@ -64,7 +64,11 @@ class Sidebar extends Component {
             icon={"fas fa-money-check-alt"}
             name={"Маблағни текшириш"}
           />
-          <SidebarItem url={"/"} icon={"far fa-bell"} name={"Ҳабарлар"} />
+          <SidebarItem
+            url={"/message"}
+            icon={"far fa-bell"}
+            name={"Ҳабарлар"}
+          />
           <SidebarItem
             url={"/shopping"}
             icon={"fas fa-book-open"}
@@ -76,7 +80,7 @@ class Sidebar extends Component {
             name={"Бизнес маркет"}
           />
           <SidebarItem
-            url={"/"}
+            url={"/partner"}
             icon={"far fa-handshake"}
             name={"Ҳамкорлик учун"}
           />
@@ -91,8 +95,18 @@ class Sidebar extends Component {
             icon={"fas fa-clipboard-list"}
             name={"Ҳаридлар архиви"}
           />
-          <SidebarItem url={"/"} icon={"fas fa-cog"} name={"Созламалар"} />
-          <SidebarItem url={"/"} icon={"fas fa-sign-out-alt"} name={"Чиқиш"} />
+          {/* <SidebarItem
+            url={"/settings"}
+            icon={"fas fa-cog"}
+            name={"Созламалар"}
+          /> */}
+          <div onClick={this.logOut}>
+            <SidebarItem
+              url={"/"}
+              icon={"fas fa-sign-out-alt"}
+              name={"Чиқиш"}
+            />
+          </div>
         </Scrollbars>
       </div>
     );

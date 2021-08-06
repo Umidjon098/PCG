@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../../style/shoping.css";
 import axios from "axios";
 import AudioItem from "./audio-item";
 import Books from "./books";
 import VideoItem from "./video-item";
-import FooterMenu from "../main-page/footer-menu";
 import Sidebar from "../sidebar/sidebar";
 class ShoppingMain extends Component {
   constructor(props) {
@@ -15,10 +15,12 @@ class ShoppingMain extends Component {
       List: [],
       page: "audio",
       toggle: false,
+      basketList: {},
     };
   }
   componentDidMount() {
     this.getCourses(this.state.number, this.state.page);
+    this.basketList();
   }
   handleSearchInput = (e) => {
     const { name, value } = e.target;
@@ -112,6 +114,7 @@ class ShoppingMain extends Component {
     }
     await axios.patch(url, data, { headers: headers }).then(() => {
       this.getCourses(this.state.number, this.state.page);
+      this.basketList();
     });
   };
   callBackToggle = (toggle) => {
@@ -119,6 +122,19 @@ class ShoppingMain extends Component {
   };
   sidebarToggle = () => {
     this.setState({ toggle: !this.state.toggle });
+  };
+
+  basketList = () => {
+    const url = "/courses/cs/basket/";
+    const headers = {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    };
+    axios(url, {
+      headers: headers,
+    }).then((response) => {
+      console.log(response.data);
+      this.setState({ basketList: response.data });
+    });
   };
 
   render() {
@@ -137,6 +153,14 @@ class ShoppingMain extends Component {
                 <span></span>
               </div>
               <div className="logo">PCG</div>
+              <Link to="/buyproduct" className="cart">
+                <i className="fas fa-shopping-cart"></i>
+                <small>
+                  {this.state.basketList.data === undefined
+                    ? 0
+                    : this.state.basketList.data.length}
+                </small>
+              </Link>
             </div>
             <div className="nav-links">
               <div

@@ -19,9 +19,9 @@ class Register extends Component {
       month: "",
       year: "",
       phone_number: "",
-      instagram: "",
-      facebook: "",
-      telegram: "",
+      instagram: null,
+      facebook: null,
+      telegram: null,
       password: "",
       password2: "",
       numberChacking: null,
@@ -78,9 +78,7 @@ class Register extends Component {
           </div>
           <span
             className={
-              this.state.file === null
-                ? "warning text-danger"
-                : "warning text-success"
+              this.state.file === null ? "warning text-danger" : "d-none"
             }
           >
             Расмингизни жойлаштиринг!
@@ -164,6 +162,7 @@ class Register extends Component {
                 required
               />
               <select onChange={this.handleInput} name="month" required>
+                <option>Ой</option>
                 <option value="1">Январ</option>
                 <option value="2">Феврал</option>
                 <option value="3">Март</option>
@@ -213,7 +212,7 @@ class Register extends Component {
             />
             <span
               className={
-                this.state.password.length === 0 ? "text-danger" : "d-none"
+                this.state.password.length < 8 ? "text-danger" : "d-none"
               }
             >
               Муҳим майдонни тўлдиринг
@@ -242,28 +241,24 @@ class Register extends Component {
               <input
                 type="text"
                 placeholder="Instagram"
-                value={this.state.instagram}
                 onChange={this.handleInput}
                 name="instagram"
               />
               <input
                 type="url"
                 placeholder="Telegram"
-                value={this.state.telegram}
                 onChange={this.handleInput}
                 name="telegram"
               />
               <input
                 type="text"
                 placeholder="Facebook"
-                value={this.state.facebook}
                 onChange={this.handleInput}
                 name="facebook"
               />
             </div>
             <div className="indecator-box">
               <span className="active"></span>
-              <span></span>
               <span></span>
               <span></span>
             </div>

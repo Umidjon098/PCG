@@ -40,7 +40,7 @@ class Profile extends Component {
             <img src={profileData.image} alt="" />
             <div className="icon">
               <Link to="/edit">
-                <i class="far fa-edit"></i>
+                <i className="far fa-edit"></i>
               </Link>
             </div>
           </div>

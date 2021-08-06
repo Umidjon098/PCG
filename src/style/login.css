@@ -7,6 +7,10 @@
   animation-name: Show;
   animation-duration: 3s;
 }
+.login-box .loader img {
+  width: 100%;
+  height: 30px;
+}
 .login-box form {
   display: flex;
   flex-direction: column;
@@ -18,6 +22,9 @@
 .login-box .input-box {
   width: 100%;
   position: relative;
+}
+.login-box .input-box:nth-child(2) {
+  margin-bottom: 20px;
 }
 .login-box .input-box i {
   position: absolute;

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Preloader from "../../image/preloader.gif";
 import "../../style/profile.css";
 import FooterMenu from "../main-page/footer-menu";

@@ -14,16 +14,16 @@ class EditData extends Component {
       middle_name: "",
       birthday: "",
       email: "",
-      phone_number: "",
-      instagram: "https://instagram",
-      facebook: "https://facebook",
-      telegram: "https://telegram",
+      phone_number: null,
+      instagram: null,
+      facebook: null,
+      telegram: null,
       numberChacking: null,
     };
   }
 
   componentDidMount() {
-    const url = "/profile/user";
+    const url = "/profile/user/";
     const headers = {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     };
@@ -39,12 +39,18 @@ class EditData extends Component {
         instagram: data.data.instagram,
         facebook: data.data.facebook,
         telegram: data.data.telegram,
+        numberChacking: false,
       });
     });
   }
+  componentDidUpdate() {
+    if (this.state.phone_number.length >= 11 && this.state.check === true) {
+      this.phoneNumberChecking();
+    }
+  }
   updateUserData = async (e) => {
     e.preventDefault();
-    const url = "/profile/user/";
+    const url = "/profile/history/";
     const headers = {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     };
@@ -61,16 +67,13 @@ class EditData extends Component {
     userForm.append("instagram", this.state.instagram);
     userForm.append("telegram", this.state.telegram);
     userForm.append("facebook", this.state.facebook);
-
     await axios({
-      method: "put",
+      method: "POST",
       url: url,
       headers: headers,
       data: userForm,
     })
-      .then(() => {
-        this.props.history.push("/success");
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -78,6 +81,9 @@ class EditData extends Component {
   handleInput = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+    if (this.state.phone_number.length >= 11) {
+      this.setState({ check: true });
+    }
   };
   fileSelectedHandler = (event) => {
     let file = event.target.files[0];
@@ -91,24 +97,14 @@ class EditData extends Component {
     };
     reader.readAsDataURL(event.target.files[0]);
   };
-  phoneNumberChecking = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-    const url = "/profile/phone_number";
+  phoneNumberChecking = () => {
+    const url = "/profile/phone-number/";
     let data = {
       phone_number: this.state.phone_number,
     };
-    if (this.state.phone_number.length > 11) {
-      axios
-        .post(url, data, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          },
-        })
-        .then((data) => {
-          this.setState({ numberChacking: data.data.check });
-        });
-    }
+    axios.post(url, data).then((data) => {
+      this.setState({ numberChacking: data.data.check, check: false });
+    });
   };
   render() {
     return (
@@ -175,7 +171,6 @@ class EditData extends Component {
                 required
               />
             </div>
-
             <input
               type="email"
               placeholder="Э-маил"
@@ -185,15 +180,19 @@ class EditData extends Component {
               required
             />
             <input
-              id={this.state.numberChacking ? "phone_1" : ""}
-              className="mb-4"
               type="number"
               placeholder="*Телефон рақамингиз"
               name="phone_number"
               value={this.state.phone_number}
-              onChange={this.phoneNumberChecking}
+              onChange={this.handleInput}
               required
             />
+            <span
+              className={this.state.numberChacking ? "text-danger" : "d-none"}
+            >
+              Телефон рақам аллақачон рўйхатдан ўтган
+            </span>
+            <br />
             <span>Ижтимоий тармоғлардаги ҳаволангизни қолдиринг</span>
             <div style={{ marginTop: "-10px" }}>
               <input

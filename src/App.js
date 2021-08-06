@@ -31,6 +31,7 @@ import ReferalLink from "./components/referallink/referallink";
 import MainSearch from "./components/search/main-search";
 import BusinessDetail from "./components/add-business/business-detail";
 import ProfileDetail from "./components/profile/user-profile-detail";
+import Partner from "./components/partner/partner";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -280,6 +281,15 @@ class App extends Component {
               render={(props) => (
                 <Auth>
                   <ReferalLink {...props} />
+                </Auth>
+              )}
+            />
+            <Route
+              exact
+              path="/partner"
+              render={(props) => (
+                <Auth>
+                  <Partner {...props} />
                 </Auth>
               )}
             />

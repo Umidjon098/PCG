@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import IMG from "../../image/news1.png";
 
 class BusinessGallery extends Component {
   constructor(props) {
@@ -11,8 +10,8 @@ class BusinessGallery extends Component {
       <section className="multimedia">
         <div className="title">Бизнес фаолиятига оид фото суратлар</div>
         <div className="img-box">
-          {this.props.images.map((data, index) => {
-            return <img key={index} src={data.image} alt="" />;
+          {this.props.images.map((data) => {
+            return <img key={data.id} src={data.image} alt="" />;
           })}
         </div>
       </section>

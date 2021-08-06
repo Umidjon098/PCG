@@ -15,6 +15,11 @@ class Favorite extends Component {
           <img src={Preloader} alt="" />
         </div>
       );
+    } else if (
+      this.props.favoruitList.news.results.length === 0 &&
+      this.props.favoruitList.discount.results.length === 0
+    ) {
+      return <p className="text-center mt-3">Mavjud emas</p>;
     } else {
       return (
         <div>
@@ -37,7 +42,7 @@ class Favorite extends Component {
             );
           })}
           {this.props.favoruitList.discount.results.length === 0 ? (
-            <div></div>
+            <p className="text-center mt-3">Mavjud emas</p>
           ) : (
             <div>
               {this.props.favoruitList.discount.results.map((data) => {
