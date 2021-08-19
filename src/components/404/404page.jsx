@@ -15,7 +15,7 @@ class PageNotFound extends Component {
                 <div className="contant_box_404">
                   <h3 className="h2">Page not found!</h3>
                   <p>the page you are looking for not avaible!</p>
-                  <Link to="/">Go to home</Link>
+                  <Link to="/mainpage">Go to home</Link>
                 </div>
               </div>
             </div>

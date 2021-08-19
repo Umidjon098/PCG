@@ -65,7 +65,7 @@ class Sidebar extends Component {
             name={"Маблағни текшириш"}
           />
           <SidebarItem
-            url={"/message"}
+            url={"/notification"}
             icon={"far fa-bell"}
             name={"Ҳабарлар"}
           />

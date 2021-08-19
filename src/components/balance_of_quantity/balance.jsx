@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import BRO from "../../image/icons/bro.svg";
 import CART from "../../image/icons/cart.svg";
@@ -5,8 +6,22 @@ import CART from "../../image/icons/cart.svg";
 class Balance extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      balance: {},
+    };
   }
+  componentDidMount() {
+    this.getBalance();
+  }
+  getBalance = () => {
+    const url = "/profile/mywallet/";
+    const headers = {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+    };
+    axios.get(url, { headers: headers }).then((response) => {
+      this.setState({ balance: response.data });
+    });
+  };
   render() {
     return (
       <div className="balance-box">
@@ -16,7 +31,7 @@ class Balance extends Component {
             <div className="value-box-item">
               <div className="item">
                 <img src={BRO} alt="" />
-                <div className="value">250</div>
+                <div className="value">{this.state.balance.balance}</div>
               </div>
             </div>
           </div>
@@ -37,7 +52,7 @@ class Balance extends Component {
           <div className="cart-box">
             <div className="cart-item">
               <div className="number">000 001</div>
-              <div className="user-name">Азимова Робия Аъзамовна</div>
+              <div className="user-name">{this.state.balance.full_name}</div>
               <img src={CART} alt="" />
             </div>
           </div>

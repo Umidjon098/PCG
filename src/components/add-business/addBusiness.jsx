@@ -122,7 +122,8 @@ class BusinessAdd extends Component {
         }, 4000);
       })
       .catch((error) => {
-        console.log(error);
+        this.setState({ event: false, showalert: false });
+        // console.log(error.response.data);
       });
   };
   getBusinessActivity = () => {
@@ -160,6 +161,7 @@ class BusinessAdd extends Component {
               style={{ display: "none" }}
               onChange={this.fileSelectedHandler}
               ref={(imgFile) => (this.imgFile = imgFile)}
+              required
             />
             <img
               src={Camera}
@@ -170,12 +172,13 @@ class BusinessAdd extends Component {
         </div>
         <div className="register-box">
           <section className="form-box">
-            <form>
+            <form onSubmit={this.createBusiness}>
               <input
                 type="text"
                 placeholder="*Бизнесингиз номи"
                 name="name"
                 onChange={this.handleInput}
+                required
               />
               <input
                 className="mb-4"
@@ -183,6 +186,7 @@ class BusinessAdd extends Component {
                 placeholder="*Лавозимингиз"
                 name="position"
                 onChange={this.handleInput}
+                required
               />
 
               <select name="activity_type" onChange={this.handleInput}>
@@ -211,6 +215,7 @@ class BusinessAdd extends Component {
                 placeholder="Веб сайтингиз"
                 name="website"
                 onChange={this.handleInput}
+                required
               />
               <span className="social-title">
                 Бизнесингизнинг ижтимоий тармоқлардаги саҳифалар ҳаволасини
@@ -223,18 +228,21 @@ class BusinessAdd extends Component {
                   placeholder="Instagram"
                   onChange={this.handleInput}
                   name="instagram"
+                  required
                 />
                 <input
                   type="url"
                   placeholder="Telegram"
                   onChange={this.handleInput}
                   name="telegram"
+                  required
                 />
                 <input
                   type="text"
                   placeholder="Facebook"
                   onChange={this.handleInput}
                   name="facebook"
+                  required
                 />
               </div>
               <span className="social-title">
@@ -259,6 +267,7 @@ class BusinessAdd extends Component {
                     style={{ display: "none" }}
                     onChange={this.businessImgHandler}
                     ref={(fileInput) => (this.fileInput = fileInput)}
+                    required
                   />
                   <img
                     src={CameraWhite}
@@ -273,7 +282,7 @@ class BusinessAdd extends Component {
               <div className="map-box mb-5">
                 <Map callBackData={this.callBackData} />
               </div>
-              <button onClick={this.createBusiness}>ҚЎШИШ</button>
+              <button type="submit">ҚЎШИШ</button>
             </form>
           </section>
         </div>

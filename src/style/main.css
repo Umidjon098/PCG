@@ -1,11 +1,12 @@
 .main-box {
   animation-name: Show;
   animation-duration: 4s;
+  padding-bottom: 100px;
 }
 .carousel-box {
   width: 100%;
   height: 200px;
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 }
 .carousel-box img {
   width: 100%;
@@ -89,6 +90,7 @@
   margin-top: 40px;
   box-shadow: 7px 5px 15px rgba(66, 66, 66, 0.3);
 }
+
 .main-box .new-box .image-box {
   position: relative;
   width: 100%;
@@ -170,7 +172,7 @@
   z-index: 10;
   /* margin-bottom: 20px; */
 }
-.menu-item {
+.bottom-menu .menu-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -181,7 +183,7 @@
   border-radius: 50%;
   color: #fff !important;
 }
-.menu-item i {
+.bottom-menu .menu-item i {
   color: #fff;
 }
 .bottom-menu .menu-item.active {

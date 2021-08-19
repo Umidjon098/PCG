@@ -38,7 +38,11 @@ class FooterMenu extends Component {
             <i className="fas fa-search"></i>
           </Link>
         </div>
-        <div className="menu-item">
+        <div
+          className={
+            this.props.active === "message" ? "menu-item active" : "menu-item"
+          }
+        >
           <Link to="/message">
             <i className="fas fa-envelope"></i>
           </Link>

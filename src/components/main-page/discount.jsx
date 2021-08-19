@@ -27,18 +27,16 @@ class Discount extends Component {
         <div>
           {this.props.discount.results.map((data) => {
             return (
-              <div key={data.id}>
-                <DiscountItem
-                  onCallBackId={this.onCallBackId}
-                  is_favorite={data.is_favorite}
-                  getCallBacDiscountID={this.getCallBacDiscountID}
-                  key={data.id}
-                  id={data.id}
-                  img={data.font_photo}
-                  title={data.title}
-                  text={data.font_text}
-                />
-              </div>
+              <DiscountItem
+                onCallBackId={this.onCallBackId}
+                is_favorite={data.is_favorite}
+                getCallBacDiscountID={this.getCallBacDiscountID}
+                key={data.id}
+                id={data.id}
+                img={data.font_photo}
+                title={data.title}
+                text={data.font_text}
+              />
             );
           })}
         </div>

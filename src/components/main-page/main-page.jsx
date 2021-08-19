@@ -283,7 +283,11 @@ class MainPage extends Component {
           </div>
           <div
             className={
-              this.state.List.length <= 4 ? "d-none" : "pagination-box"
+              this.state.List.results === undefined
+                ? "d-none"
+                : this.state.List.results.length <= 4
+                ? "d-none"
+                : "pagination-box"
             }
           >
             <Pagination>

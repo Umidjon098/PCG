@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../../style/course.css";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import Loader from "../../image/preloader.gif";
+
 import axios from "axios";
 class CourseData extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class CourseData extends Component {
       number_type: null,
       number_of_group: null,
       groupData: [],
+      event: false,
     };
   }
   componentDidMount() {
@@ -63,9 +66,13 @@ class CourseData extends Component {
       data: userFrom,
     })
       .then((response) => {
+        this.setState({ event: false });
         if (response.data.success) {
           this.props.history.push("/success");
         }
+        setTimeout(() => {
+          this.props.history.push("/");
+        }, 4000);
       })
       .catch((error) => {
         console.error(error);
@@ -75,6 +82,9 @@ class CourseData extends Component {
     const { groupData } = this.state;
     return (
       <div className="course-box">
+        <div className={this.state.event ? "waiting-event" : "d-none"}>
+          <img src={Loader} alt="" />
+        </div>
         <form onSubmit={this.createUser}>
           <span>Қайси курс ўқувчиси эканлигингизни белгиланг</span>
           <select onChange={this.handleInput} name="type">
@@ -91,7 +101,6 @@ class CourseData extends Component {
           </select>
           <select onChange={this.handleInput} name="number_type">
             <option>---</option>
-
             {groupData.map((data) => {
               return data.id === parseInt(this.state.type)
                 ? data.numbers.map((number) => {

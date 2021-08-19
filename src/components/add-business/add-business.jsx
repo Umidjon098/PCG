@@ -28,7 +28,7 @@ class AddBusiness extends Component {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
     }).then((response) => {
-      this.setState({ businessList: response.data });
+      this.setState({ businessList: response });
     });
   };
   callBackToggle = (toggle) => {
@@ -51,12 +51,14 @@ class AddBusiness extends Component {
           </div>
           <div className="section-title">Бизнес рўйхатлари</div>
         </section>
-        {this.state.businessList.length === 0 ? (
+        {this.state.businessList.data === undefined ? (
           <div className="preloader">
             <img src={Preloader} alt="" />
           </div>
+        ) : this.state.businessList.data.length === 0 ? (
+          <p className="text-center mt-3">Natija topilmadi</p>
         ) : (
-          this.state.businessList.map((data) => {
+          this.state.businessList.data.map((data) => {
             return (
               <section key={data.id} className="business-card-box">
                 <BusinessCard

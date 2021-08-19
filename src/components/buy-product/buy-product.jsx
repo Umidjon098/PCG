@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import BRO from "../../image/icons/bro.svg";
 class BuyProduct extends Component {
   constructor(props) {
@@ -29,8 +30,8 @@ class BuyProduct extends Component {
     const data = {
       total: this.state.basketList.total,
     };
-    await axios.post(url, data, { headers: headers }).then((data) => {
-      console.log(data);
+    await axios.post(url, data, { headers: headers }).then(() => {
+      this.props.history.push("/library");
     });
   };
   render() {
@@ -56,7 +57,6 @@ class BuyProduct extends Component {
             {this.state.basketList.data === undefined
               ? ""
               : this.state.basketList.data.map((data) => {
-                  console.log(data);
                   return (
                     <div key={data.id} className="book-box">
                       <div className="book">
@@ -83,4 +83,4 @@ class BuyProduct extends Component {
   }
 }
 
-export default BuyProduct;
+export default withRouter(BuyProduct);

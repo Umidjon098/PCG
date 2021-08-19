@@ -132,7 +132,6 @@ class ShoppingMain extends Component {
     axios(url, {
       headers: headers,
     }).then((response) => {
-      console.log(response.data);
       this.setState({ basketList: response.data });
     });
   };
@@ -155,11 +154,21 @@ class ShoppingMain extends Component {
               <div className="logo">PCG</div>
               <Link to="/buyproduct" className="cart">
                 <i className="fas fa-shopping-cart"></i>
-                <small>
-                  {this.state.basketList.data === undefined
-                    ? 0
-                    : this.state.basketList.data.length}
-                </small>
+                <div
+                  className={
+                    this.state.basketList.data === undefined
+                      ? "d-none"
+                      : this.state.basketList.data.length === 0
+                      ? "d-none"
+                      : "count-basket"
+                  }
+                >
+                  <small>
+                    {this.state.basketList.data === undefined
+                      ? ""
+                      : this.state.basketList.data.length}
+                  </small>
+                </div>
               </Link>
             </div>
             <div className="nav-links">

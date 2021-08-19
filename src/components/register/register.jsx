@@ -215,7 +215,7 @@ class Register extends Component {
                 this.state.password.length < 8 ? "text-danger" : "d-none"
               }
             >
-              Муҳим майдонни тўлдиринг
+              8 та белгидан кам бўлмаган парол киритинг!
             </span>
             <input
               type="password"

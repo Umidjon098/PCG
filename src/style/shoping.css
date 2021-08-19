@@ -33,15 +33,19 @@
   font-size: 22px;
   color: #fff;
 }
-.top-nav .cart small {
+.top-nav .cart .count-basket {
   position: absolute;
   top: -7px;
-  left: 10px;
+  left: 15px;
+  width: 20px;
+  height: 20px;
   color: #fff;
   font-size: 12px;
   background: red;
-  padding: 2px 7px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .shoping-nav .nav-links {
   display: flex;

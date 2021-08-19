@@ -28,6 +28,9 @@ class Search extends Component {
       },
     }).then((response) => {
       this.setState({ businessList: response.data });
+      if (response.data.length === 0) {
+        this.setState({ empty: true });
+      }
     });
   };
 

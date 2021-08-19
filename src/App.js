@@ -32,6 +32,11 @@ import MainSearch from "./components/search/main-search";
 import BusinessDetail from "./components/add-business/business-detail";
 import ProfileDetail from "./components/profile/user-profile-detail";
 import Partner from "./components/partner/partner";
+import Notification from "./components/message/notification";
+import Message from "./components/message/message";
+import Chat from "./components/message/chat/chat";
+import ProductDetail from "./components/business-market/product-detail";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -57,248 +62,284 @@ class App extends Component {
   };
 
   render() {
-    if (this.state.loading === true) {
-      return <PreLoader />;
-    } else {
-      return (
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/sidebar" component={Sidebar} />
-            <Route path="/register" component={Registration} />
-            <Route exact path="/carousel" component={CourselData} />
-            <Route
-              exact
-              path="/waiting"
-              render={(props) => (
-                <Auth>
-                  <Waiting {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/mainpage"
-              render={(props) => (
-                <Auth>
-                  <MainPage
-                    {...props}
-                    getCallBackNewsID={this.getCallBackNewsID}
-                    getCallBacDiscountID={this.getCallBacDiscountID}
-                  />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/addbusiness"
-              render={(props) => (
-                <Auth>
-                  <AddBusiness {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/search"
-              render={(props) => (
-                <Auth>
-                  <MainSearch {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/profile"
-              render={(props) => (
-                <Auth>
-                  <Profile {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/users_detail"
-              render={(props) => (
-                <Auth>
-                  <ProfileDetail {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/success"
-              render={(props) => (
-                <Auth>
-                  <Success {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/businessadd"
-              render={(props) => (
-                <Auth>
-                  <BusinessAdd {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/news-detail"
-              render={(props) => (
-                <Auth>
-                  <NewsDetail id={this.state.id} {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/discount-detail"
-              render={(props) => (
-                <Auth>
-                  <DiscountDetail id={this.state.favoriteDiscount} {...props} />
-                </Auth>
-              )}
-            ></Route>
-            <Route
-              exact
-              path="/shopping"
-              render={(props) => (
-                <Auth>
-                  <ShoppingMain
-                    getCallBackList={this.getCallBackList}
-                    {...props}
-                  />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/edit"
-              render={(props) => (
-                <Auth>
-                  <EditData {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/businessedit"
-              render={(props) => (
-                <Auth>
-                  <BusinessEdit {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/bookdetail"
-              render={(props) => (
-                <Auth>
-                  <BookDetail
-                    data={this.state.List}
-                    getCallBackList={this.getCallBackList}
-                    {...props}
-                  />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/videodetail"
-              render={(props) => (
-                <Auth>
-                  <VideoDetail
-                    data={this.state.List}
-                    getCallBackList={this.getCallBackList}
-                    {...props}
-                  />
-                </Auth>
-              )}
-            />
-            <Route
-              path="/buyproduct"
-              render={(props) => (
-                <Auth>
-                  <BuyProduct {...props} />
-                </Auth>
-              )}
-            />
+    // if (this.state.loading === true) {
+    //   return <PreLoader />;
+    // } else {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/sidebar" component={Sidebar} />
+          <Route path="/register" component={Registration} />
+          <Route exact path="/carousel" component={CourselData} />
+          <Route
+            exact
+            path="/waiting"
+            render={(props) => (
+              <Auth>
+                <Waiting {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/mainpage"
+            render={(props) => (
+              <Auth>
+                <MainPage
+                  {...props}
+                  getCallBackNewsID={this.getCallBackNewsID}
+                  getCallBacDiscountID={this.getCallBacDiscountID}
+                />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/addbusiness"
+            render={(props) => (
+              <Auth>
+                <AddBusiness {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/search"
+            render={(props) => (
+              <Auth>
+                <MainSearch {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={(props) => (
+              <Auth>
+                <Profile {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/users_detail"
+            render={(props) => (
+              <Auth>
+                <ProfileDetail {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/success"
+            render={(props) => (
+              <Auth>
+                <Success {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/businessadd"
+            render={(props) => (
+              <Auth>
+                <BusinessAdd {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/news-detail"
+            render={(props) => (
+              <Auth>
+                <NewsDetail id={this.state.id} {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/discount-detail"
+            render={(props) => (
+              <Auth>
+                <DiscountDetail id={this.state.favoriteDiscount} {...props} />
+              </Auth>
+            )}
+          ></Route>
+          <Route
+            exact
+            path="/shopping"
+            render={(props) => (
+              <Auth>
+                <ShoppingMain
+                  getCallBackList={this.getCallBackList}
+                  {...props}
+                />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/edit"
+            render={(props) => (
+              <Auth>
+                <EditData {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/businessedit"
+            render={(props) => (
+              <Auth>
+                <BusinessEdit {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/bookdetail"
+            render={(props) => (
+              <Auth>
+                <BookDetail
+                  data={this.state.List}
+                  getCallBackList={this.getCallBackList}
+                  {...props}
+                />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/videodetail"
+            render={(props) => (
+              <Auth>
+                <VideoDetail
+                  data={this.state.List}
+                  getCallBackList={this.getCallBackList}
+                  {...props}
+                />
+              </Auth>
+            )}
+          />
+          <Route
+            path="/buyproduct"
+            render={(props) => (
+              <Auth>
+                <BuyProduct {...props} />
+              </Auth>
+            )}
+          />
 
-            <Route
-              exact
-              path="/library"
-              render={(props) => (
-                <Auth>
-                  <Library {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/balance"
-              render={(props) => (
-                <Auth>
-                  <BalanceOfQuantity {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/conversion"
-              render={(props) => (
-                <Auth>
-                  <Conversion {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/balance_cart"
-              render={(props) => (
-                <Auth>
-                  <Balance {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/club_gold"
-              render={(props) => (
-                <Auth>
-                  <ClubGold {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/business_market"
-              render={(props) => (
-                <Auth>
-                  <BusinessMarket {...props} />
-                </Auth>
-              )}
-            />
-            <Route exact path="/business_detail" component={BusinessDetail} />
-            <Route
-              exact
-              path="/referal_link"
-              render={(props) => (
-                <Auth>
-                  <ReferalLink {...props} />
-                </Auth>
-              )}
-            />
-            <Route
-              exact
-              path="/partner"
-              render={(props) => (
-                <Auth>
-                  <Partner {...props} />
-                </Auth>
-              )}
-            />
-            <Route exact path="*" component={PageNotFound} />
-          </Switch>
-        </Router>
-      );
-    }
+          <Route
+            exact
+            path="/library"
+            render={(props) => (
+              <Auth>
+                <Library {...props} />
+              </Auth>
+            )}
+          />
+          {/* <Route
+            exact
+            path="/balance"
+            render={(props) => (
+              <Auth>
+                <BalanceOfQuantity {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/conversion"
+            render={(props) => (
+              <Auth>
+                <Conversion {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/balance_cart"
+            render={(props) => (
+              <Auth>
+                <Balance {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/club_gold"
+            render={(props) => (
+              <Auth>
+                <ClubGold {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/business_market"
+            render={(props) => (
+              <Auth>
+                <BusinessMarket {...props} />
+              </Auth>
+            )}
+          /> */}
+          <Route exact path="/business_detail" component={BusinessDetail} />
+          <Route
+            exact
+            path="/referal_link"
+            render={(props) => (
+              <Auth>
+                <ReferalLink {...props} />
+              </Auth>
+            )}
+          />
+          {/* <Route
+            exact
+            path="/partner"
+            render={(props) => (
+              <Auth>
+                <Partner {...props} />
+              </Auth>
+            )}
+          /> */}
+          {/* <Route
+            exact
+            path="/notification"
+            render={(props) => (
+              <Auth>
+                <Notification {...props} />
+              </Auth>
+            )}
+          /> */}
+          {/* <Route
+            exact
+            path="/message"
+            render={(props) => (
+              <Auth>
+                <Message {...props} />
+              </Auth>
+            )}
+          />
+          <Route
+            exact
+            path="/chat"
+            render={(props) => (
+              <Auth>
+                <Chat {...props} />
+              </Auth>
+            )}
+          /> */}
+          <Route
+            exact
+            path="/product-detail"
+            render={(props) => (
+              // <Auth>
+              <ProductDetail {...props} />
+              // </Auth>
+            )}
+          />
+          <Route exact path="*" component={PageNotFound} />
+        </Switch>
+      </Router>
+    );
   }
+  // }
 }
 
 export default App;

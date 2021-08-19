@@ -27,6 +27,9 @@ class UserSearch extends Component {
       },
     }).then((response) => {
       this.setState({ usersList: response.data });
+      if (response.data.length === 0) {
+        this.setState({ empty: true });
+      }
     });
   };
   handleSearchInput = (e) => {

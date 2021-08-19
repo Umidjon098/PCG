@@ -9,7 +9,7 @@ class Login extends Component {
     this.state = {
       phone_number: "",
       password: "",
-      warning: false,
+      alertText: "",
       login: false,
     };
   }
@@ -17,14 +17,15 @@ class Login extends Component {
   handleInput = (e) => {
     const { value, name } = e.target;
     this.setState({ [name]: value });
+    this.setState({ warning: false });
   };
 
-  Login = (e) => {
+  Login = async (e) => {
     e.preventDefault();
     this.setState({ login: true });
     const { phone_number, password } = this.state;
     const URL = "/profile/token/";
-    axios
+    await axios
       .post(URL, {
         phone_number,
         password,
@@ -37,14 +38,27 @@ class Login extends Component {
           this.setState({ login: false });
         }
       })
-      .catch(() => {
-        this.setState({ warning: true });
+      .catch((error) => {
+        if (error.response === undefined) {
+          this.setState({
+            alertText: "Internet bilan aloqa yo'q!",
+          });
+        } else if (error.response.status === 400) {
+          this.setState({
+            alertText: "Hali maderator tomonidan tasdiqlanmagan!",
+          });
+        } else {
+          this.setState({
+            alertText: " Telefon raqam yoki parol noto'g'ri!",
+          });
+        }
+        this.setState({ login: false });
       });
   };
   render() {
     return (
       <div className="login-box">
-        <form>
+        <form onSubmit={this.Login}>
           <div className={this.state.login ? "loader" : "d-none"}>
             <img src={Loader} alt="" />
           </div>
@@ -56,6 +70,7 @@ class Login extends Component {
               name="phone_number"
               value={this.state.phone_number}
               onChange={this.handleInput}
+              required
             />
           </div>
           <div className="input-box">
@@ -68,17 +83,10 @@ class Login extends Component {
               placeholder="Парол"
               name="password"
               onChange={this.handleInput}
+              required
             />
           </div>
-          <label
-            className={
-              this.state.warning
-                ? "warning-volidation "
-                : "warning-volidation d-none"
-            }
-          >
-            Telefon raqam yoki parol noto'g'ri!
-          </label>
+          <label className="warning-volidation">{this.state.alertText}</label>
           <div className="register-box">
             <span>
               <span className="text-secondary">Рўйхатдан ўтганмисиз | </span>
@@ -87,8 +95,7 @@ class Login extends Component {
               </Link>
             </span>
           </div>
-
-          <button className="submit-button" onClick={this.Login}>
+          <button type="submit" className="submit-button">
             КИРИШ
           </button>
         </form>
