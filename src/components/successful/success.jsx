@@ -24,7 +24,6 @@ class Success extends Component {
             <span className="active"></span>
             <span className="active"></span>
             <span className="active"></span>
-            <span className="active"></span>
           </div>
         </div>
       </div>

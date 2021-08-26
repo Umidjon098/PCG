@@ -13,9 +13,12 @@ class AlertError extends Component {
       >
         <span className="fas fa-exclamation-circle"></span>
         <span className="title">Error!</span>
-        <span className="msg">Addition failed</span>
+        <span className="msg">Muhum maydonlarni to'ldiring!</span>
         <span className="close-btn">
-          <span className="fas fa-times"></span>
+          <span
+            className="fas fa-times"
+            onClick={() => this.props.closeAlert(true)}
+          ></span>
         </span>
       </div>
     );

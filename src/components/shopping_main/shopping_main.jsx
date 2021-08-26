@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "../../style/shoping.css";
 import axios from "axios";
 import AudioItem from "./audio-item";
 import Books from "./books";
 import VideoItem from "./video-item";
 import Sidebar from "../sidebar/sidebar";
+import Navbar from "./navbar";
+import Search from "./search";
 class ShoppingMain extends Component {
   constructor(props) {
     super(props);
@@ -98,6 +100,7 @@ class ShoppingMain extends Component {
       });
   };
   buyProduct = async (id, data_tip) => {
+    console.log(data_tip);
     const url = `/courses/cs/${id}/`;
     const headers = {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
@@ -145,78 +148,25 @@ class ShoppingMain extends Component {
           callBackToggle={this.callBackToggle}
         />
         <div className="shopping-box">
-          <div className="shoping-nav">
-            <div className="top-nav">
-              <div className="burger-bot" onClick={this.sidebarToggle}>
-                <span></span>
-                <span></span>
-              </div>
-              <div className="logo">PCG</div>
-              <Link to="/buyproduct" className="cart">
-                <i className="fas fa-shopping-cart"></i>
-                <div
-                  className={
-                    this.state.basketList.data === undefined
-                      ? "d-none"
-                      : this.state.basketList.data.length === 0
-                      ? "d-none"
-                      : "count-basket"
-                  }
-                >
-                  <small>
-                    {this.state.basketList.data === undefined
-                      ? ""
-                      : this.state.basketList.data.length}
-                  </small>
-                </div>
-              </Link>
-            </div>
-            <div className="nav-links">
-              <div
-                className={page === "audio" ? "active" : ""}
-                onClick={() => this.getCourses(this.state.number, "audio")}
-              >
-                Аудио курс
-              </div>
-              <div
-                className={page === "video" ? "active" : ""}
-                onClick={() => this.getCourses(this.state.number, "video")}
-              >
-                Видео курс
-              </div>
-              <div
-                className={page === "book" ? "active" : ""}
-                onClick={() => this.getCourses(this.state.number, "book")}
-              >
-                Китоблар
-              </div>
-            </div>
-          </div>
-          <div className="shoping-search">
-            <form onSubmit={this.search}>
-              <i className="fas fa-search"></i>
-              <input
-                tip="text"
-                name="searchItem"
-                placeholder="Search"
-                onChange={this.handleSearchInput}
-              />
-              <button type="submit" className="d-none"></button>
-            </form>
-          </div>
-          {page === "audio" ? (
-            <AudioItem List={List} buyProduct={this.buyProduct} />
-          ) : page === "video" ? (
-            <VideoItem
-              getCourseDetail={this.getCourseDetail}
-              List={List}
-              buyProduct={this.buyProduct}
-            />
-          ) : page === "book" ? (
-            <Books getCourseDetail={this.getCourseDetail} List={List} />
-          ) : (
-            ""
-          )}
+          <Navbar basketList={this.state.basketList} page={this.state.page} />
+          <Search />
+          <Router>
+            <Switch>
+              <Route>
+                <AudioItem List={List} buyProduct={this.buyProduct} />
+              </Route>
+              <Route>
+                <VideoItem
+                  getCourseDetail={this.getCourseDetail}
+                  List={List}
+                  buyProduct={this.buyProduct}
+                />
+              </Route>
+              <Route>
+                <Books getCourseDetail={this.getCourseDetail} List={List} />
+              </Route>
+            </Switch>
+          </Router>
         </div>
       </div>
     );

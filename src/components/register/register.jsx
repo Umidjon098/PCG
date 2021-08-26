@@ -35,6 +35,7 @@ class Register extends Component {
   }
   passDataToParent = () => {
     this.props.callBackRegisterData(this.state);
+    this.props.history.push("/register/coursedata");
   };
 
   handleInput = (e) => {
@@ -103,7 +104,7 @@ class Register extends Component {
           <div className="form-title">
             <span>Рўйҳатдан ўтиш</span>
           </div>
-          <form>
+          <form onSubmit={this.passDataToParent}>
             <input
               type="text"
               placeholder="*Исмингиз"
@@ -262,9 +263,7 @@ class Register extends Component {
               <span></span>
               <span></span>
             </div>
-            <Link to={`${url}/coursedata`} onClick={this.passDataToParent}>
-              КЕЙИНГИСИ
-            </Link>
+            <button type="submit">КЕЙИНГИСИ</button>
           </form>
         </section>
       </div>

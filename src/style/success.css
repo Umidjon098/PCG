@@ -48,3 +48,12 @@
 .indecator-box span:last-child {
   margin-right: 0;
 }
+@media (min-width: 650px) {
+  .success-box {
+    padding: 0 30px;
+  }
+  .img-box img {
+    width: 400px;
+    margin-left: 120px;
+  }
+}

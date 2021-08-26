@@ -33,8 +33,11 @@ class Login extends Component {
       .then((response) => {
         localStorage.setItem("accessToken", response.data.access);
         localStorage.setItem("refreshToken", response.data.refresh);
-        if (localStorage.getItem("accessToken")) {
+        if (localStorage.getItem("accessToken") && !response.data.admin) {
           this.props.history.push("/mainpage");
+          this.setState({ login: false });
+        } else {
+          this.props.history.push("/admin");
           this.setState({ login: false });
         }
       })

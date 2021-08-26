@@ -13,7 +13,7 @@ class Header extends Component {
           <span></span>
           <span></span>
         </div>
-        <div className="page-title">Бизнес маркет</div>
+        <div className="page-title">{this.props.title}</div>
         <div className="icon">
           <img src={BM} alt="" />
         </div>

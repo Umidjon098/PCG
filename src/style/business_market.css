@@ -178,7 +178,7 @@
 }
 .product-detail-img {
   width: 100%;
-  height: 100vh;
+  height: 65vh;
   position: relative;
   display: block;
   overflow: hidden;
@@ -186,7 +186,7 @@
 .product-detail-img .circle {
   z-index: -1;
   position: absolute;
-  top: -40%;
+  top: -60%;
   left: 50%;
   transform: translate(-50%);
   display: block;
@@ -229,9 +229,295 @@
   justify-content: center;
   align-items: center;
 }
+.product-detail-img .carousel-card .add-btn {
+  position: absolute;
+  width: 30px;
+  height: 25px;
+  bottom: 20px;
+  right: 80px;
+}
+
 .product-detail-img .carousel-card img {
   width: 100%;
   height: 100%;
   border-radius: 7px;
   object-fit: cover;
+}
+.custom-carousel .swiper-slide-next {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.custom-carousel .swiper-slide-prev {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.custom-carousel .swiper-slide-next img {
+  margin-left: -70px;
+}
+.custom-carousel .swiper-slide-prev img {
+  margin-right: -70px;
+}
+.custom-carousel .swiper-slide-active {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.custom-carousel .swiper-slide-active img {
+  margin: 0;
+}
+
+.detail-data span {
+  width: 100%;
+  padding: 5px 15px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #c4c4c4;
+}
+.detail-data .company {
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail-data .company .name {
+  font-weight: 600;
+  color: #616161;
+  font-size: 16px;
+}
+.detail-data .company .city {
+  font-weight: 300;
+  color: #767474;
+  font-size: 16px;
+}
+.detail-data .main-data {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.detail-data .main-data .item {
+  padding: 18px 15px;
+  border: 1px solid #dadada;
+  font-size: 16px;
+  font-weight: 400;
+  color: #616161;
+}
+.main-data .item.price {
+  color: #01b41f;
+}
+.detail-data .description {
+  margin-top: 30px;
+  padding: 0 15px;
+}
+.detail-data .description .title {
+  color: #414141;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.detail-data .description .text {
+  color: #767474;
+  font-size: 14px;
+  font-weight: 500;
+}
+.detail-data .about-user {
+  width: 100%;
+  margin-top: 30px;
+  text-align: end;
+  padding: 0 15px;
+  color: #414141;
+  font-size: 14px;
+  font-weight: 600;
+}
+.detail-data .social {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  margin: 10px 0 30px 0;
+}
+.detail-data .social .call-btn {
+  width: 50%;
+  background: #01b41f;
+  padding: 5px 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.detail-data .social .media {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+}
+.detail-data .social .media i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: #002e66;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.sell-product-box .form-box {
+  padding: 0 15px;
+}
+.sell-product-box .form-box span {
+  font-size: 12px;
+  font-weight: 300;
+  color: #999;
+}
+.sell-product-box .form-box input:first-child {
+  margin-top: 5px;
+}
+.sell-product-box .form-box button {
+  background: linear-gradient(180deg, #0a55b1 13.54%, #01306a 100%);
+  border: 1px solid;
+  border-image-source: linear-gradient(180deg, #013069 0%, #0a55b1 100%);
+  box-shadow: 0px 2px 6px 0px rgba(0, 46, 102, 0.35);
+  color: #fff;
+}
+.evaluation {
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  z-index: 12;
+}
+.evaluation .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.66);
+}
+.evaluation .evaluation-card {
+  display: block;
+  width: 70%;
+  height: 150px;
+  background: #fff;
+  z-index: 13;
+  border-radius: 4px;
+  padding: 15px;
+}
+.evaluation .evaluation-card .title {
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #656565;
+}
+.evaluation-card .alert-text {
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  color: #999;
+}
+.evaluation-card .evaluation-star {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  font-size: 24px;
+  color: #999;
+}
+.evaluation .delete-modal {
+  position: relative;
+}
+.evaluation .submit-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.submit-box .ok,
+.submit-box .not {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.3px solid rgba(196, 196, 196, 1);
+  padding: 10px 0;
+  margin-top: 50px;
+}
+.submit-box .not {
+  color: #01b41f;
+}
+.advertising-box .description {
+  padding: 0 16px;
+  margin-top: 20px;
+}
+.advertising-box .title {
+  font-size: 17px;
+  font-weight: 500;
+  color: #333;
+}
+.advertising-box .text {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #999;
+}
+.advertising-box a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
+  height: 52px;
+  background: linear-gradient(180deg, #0a55b1 13.54%, #01306a 100%);
+  border: 1px solid;
+  border-image-source: linear-gradient(180deg, #013069 0%, #0a55b1 100%);
+  box-shadow: 0px 2px 6px 0px rgba(0, 46, 102, 0.35);
+  border-radius: 26px;
+  color: #fff;
+}
+.slider-value {
+  margin: 0 auto;
+  width: 80%;
+}
+.adver-box .alert-box {
+  padding: 20px;
+}
+.adver-box .alert-box span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+}
+.adver-box .alert-box .text {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+  padding: 14px 20px;
+  border: 0.3px solid rgba(218, 218, 218, 1);
+  box-shadow: 0px 2px 4px 0px rgba(38, 71, 150, 0.1);
+}
+.adver-box .submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
+  height: 52px;
+  background: linear-gradient(180deg, #0a55b1 13.54%, #01306a 100%);
+  border: 1px solid;
+  border-image-source: linear-gradient(180deg, #013069 0%, #0a55b1 100%);
+  box-shadow: 0px 2px 6px 0px rgba(0, 46, 102, 0.35);
+  border-radius: 26px;
+  color: #fff;
 }

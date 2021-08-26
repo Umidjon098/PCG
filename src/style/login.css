@@ -80,3 +80,10 @@
     opacity: 1;
   }
 }
+@media (min-width: 650px) {
+  .login-box {
+    width: 50%;
+    margin: 0 auto;
+    padding: 0 100px;
+  }
+}

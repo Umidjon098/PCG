@@ -52,16 +52,17 @@
   justify-content: space-between;
   align-items: center;
   height: 48px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-  font-weight: 500;
 }
-.shoping-nav .nav-links div {
-  height: 100%;
-  width: 100%;
+
+.nav-links a {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+  height: 100%;
+  width: 100%;
 }
 .nav-links .active {
   color: #fff;
@@ -271,9 +272,8 @@
   display: flex;
   overflow: hidden;
   box-shadow: 0px 2px 6px 0px rgba(38, 71, 150, 0.1);
-  width: 100%;
-  min-height: 100px;
   border-radius: 7px;
+  color: rgba(255, 255, 255, 0.6);
 }
 .book-box .content {
   padding: 10px;
@@ -348,4 +348,9 @@
   position: absolute;
   top: 138px;
   left: 125px;
+}
+@media (min-width: 950px) {
+  .shopping-box {
+    padding: 0 25%;
+  }
 }

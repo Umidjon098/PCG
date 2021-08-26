@@ -6,6 +6,7 @@ import MarketFIlter from "./filter";
 import Header from "./header";
 import PageLink from "./link";
 import MarketSearch from "./search";
+import Evaluation from "./sell-products/evaluation";
 class BusinessMarket extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +21,9 @@ class BusinessMarket extends Component {
     const { path } = this.props.match;
     return (
       <div className="business-market-box">
+        {/* <Evaluation /> */}
         <div className="fixed-div">
-          <Header />
+          <Header title={"Бизнес маркет"} />
           <MarketSearch callBackToggle={this.callBackToggle} />
           <PageLink />
           <div

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import Loader from "../../image/preloader.gif";
 
 import axios from "axios";
+import AlertError from "../alert/alert-error";
 class CourseData extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +14,8 @@ class CourseData extends Component {
       number_of_group: null,
       groupData: [],
       event: false,
+      error: [],
+      showalert: true,
     };
   }
   componentDidMount() {
@@ -28,66 +31,76 @@ class CourseData extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
-
+  closeAlert = (showalert) => {
+    this.setState({ showalert });
+  };
   createUser = async (e) => {
-    this.setState({ event: true });
     e.preventDefault();
-    const { userData, groupData } = this.props;
-    const URL = "/profile/register/";
-    var userFrom = new FormData();
-    if (userData.telegram != null) {
-      userFrom.append("telegram", userData.telegram);
-    }
-    if (userData.instagram != null) {
-      userFrom.append("instagram", userData.instagram);
-    }
-    if (userData.facebook != null) {
-      userFrom.append("facebook", userData.facebook);
-    }
-    userFrom.append("image", userData.file);
-    userFrom.append("group_id", this.state.number_of_group);
-    userFrom.append("password", userData.password);
-    userFrom.append("password2", userData.password2);
-    userFrom.append("first_name", userData.first_name);
-    userFrom.append("last_name", userData.last_name);
-    userFrom.append("middle_name", userData.middle_name);
-    userFrom.append(
-      "birthday",
-      userData.year + "-" + userData.month + "-" + userData.day
-    );
-    userFrom.append("phone_number", userData.phone_number);
-    userFrom.append("email", userData.email);
-    await axios({
-      method: "post",
-      url: URL,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      data: userFrom,
-    })
-      .then((response) => {
-        this.setState({ event: false });
-        if (response.data.success) {
-          this.props.history.push("/success");
-        }
-        setTimeout(() => {
-          this.props.history.push("/");
-        }, 4000);
+    if (this.state.number_of_group === null) {
+      this.setState({ showalert: false });
+    } else {
+      this.setState({ event: true });
+      const { userData, groupData } = this.props;
+      const URL = "/profile/register/";
+      var userFrom = new FormData();
+      if (userData.telegram != null) {
+        userFrom.append("telegram", userData.telegram);
+      }
+      if (userData.instagram != null) {
+        userFrom.append("instagram", userData.instagram);
+      }
+      if (userData.facebook != null) {
+        userFrom.append("facebook", userData.facebook);
+      }
+      userFrom.append("image", userData.file);
+      userFrom.append("group_id", this.state.number_of_group);
+      userFrom.append("password", userData.password);
+      userFrom.append("password2", userData.password2);
+      userFrom.append("first_name", userData.first_name);
+      userFrom.append("last_name", userData.last_name);
+      userFrom.append("middle_name", userData.middle_name);
+      userFrom.append(
+        "birthday",
+        userData.year + "-" + userData.month + "-" + userData.day
+      );
+      userFrom.append("phone_number", userData.phone_number);
+      userFrom.append("email", userData.email);
+      await axios({
+        method: "post",
+        url: URL,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: userFrom,
       })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => {
+          this.setState({ event: false });
+          if (response.data.success) {
+            this.props.history.push("/success");
+          }
+          setTimeout(() => {
+            this.props.history.push("/");
+          }, 4000);
+        })
+        .catch((error) => {
+          this.setState({ event: false });
+        });
+    }
   };
   render() {
     const { groupData } = this.state;
     return (
       <div className="course-box">
+        <AlertError
+          showalert={this.state.showalert}
+          closeAlert={this.closeAlert}
+        />
         <div className={this.state.event ? "waiting-event" : "d-none"}>
           <img src={Loader} alt="" />
         </div>
         <form onSubmit={this.createUser}>
           <span>Қайси курс ўқувчиси эканлигингизни белгиланг</span>
-          <select onChange={this.handleInput} name="type">
+          <select onChange={this.handleInput} name="type" required>
             <option>---</option>
             {groupData === undefined
               ? console.log("0")
@@ -99,7 +112,7 @@ class CourseData extends Component {
                   );
                 })}
           </select>
-          <select onChange={this.handleInput} name="number_type">
+          <select onChange={this.handleInput} name="number_type" required>
             <option>---</option>
             {groupData.map((data) => {
               return data.id === parseInt(this.state.type)
@@ -113,9 +126,8 @@ class CourseData extends Component {
                 : "";
             })}
           </select>
-          <select onChange={this.handleInput} name="number_of_group">
+          <select onChange={this.handleInput} name="number_of_group" required>
             <option>---</option>
-
             {groupData.map((data) => {
               return data.id === parseInt(this.state.type)
                 ? data.numbers.map((number) => {

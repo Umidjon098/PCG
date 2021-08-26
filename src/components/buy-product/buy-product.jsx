@@ -18,6 +18,7 @@ class BuyProduct extends Component {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     };
     axios.get(url, { headers: headers }).then((response) => {
+      console.log(response.data);
       this.setState({ basketList: response.data });
     });
   };

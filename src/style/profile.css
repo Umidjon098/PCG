@@ -152,3 +152,8 @@
   display: block;
   width: 364px !important;
 }
+@media (min-width: 950px) {
+  .profile-box {
+    padding: 0 25%;
+  }
+}
